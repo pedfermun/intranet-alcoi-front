@@ -12,10 +12,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <img src=${viteLogo} class="vite" alt="Vite logo" />
   </div>
   <div>
-    <h1>Get started</h1>
+    <h1>Get started.</h1>
     <p>Edit <code>src/main.ts</code> and save to test <code>HMR</code></p>
   </div>
   <button id="counter" type="button" class="counter"></button>
+  <button id="intranetBtn" type="button" class="counter" style="margin-top: 10px;">Ir a Intranet</button>
 </section>
 
 <div class="ticks"></div>
@@ -58,3 +59,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+
+// Botón para ejecutar intranet.ts
+document.querySelector<HTMLButtonElement>('#intranetBtn')?.addEventListener('click', async () => {
+  const { initIntranet } = await import('./intranet.ts')
+  initIntranet()
+})
