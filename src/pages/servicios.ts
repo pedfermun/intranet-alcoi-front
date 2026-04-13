@@ -6,7 +6,8 @@ export function serviciosPage() {
         <nav class="nav">
           <a href="/" data-link>Inicio</a>
           <a href="/servicios" data-link>Servicios</a>
-          <a href="/contacto" data-link>Contacto</a>
+          <a href="/sedes" data-link>Sedes</a>
+          <a href="/contacto" data-link>Directorio</a>
         </nav>
       </header>
 

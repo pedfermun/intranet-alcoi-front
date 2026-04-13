@@ -21,6 +21,15 @@ export function loadDashboard(username: string) {
         </div>
       </header>
 
+      <!-- Navigation -->
+      <nav class="nav">
+        <a href="/" data-link>Inicio</a>
+        <a href="/servicios" data-link>Servicios</a>
+        <a href="/sedes" data-link>Sedes</a>
+        <a href="/contacto" data-link>Directorio</a>
+        <a href="/servidores" data-link>Servidores</a>
+      </nav>
+
       <!-- Main Content -->
       <main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
         
