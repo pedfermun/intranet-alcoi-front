@@ -1,6 +1,7 @@
 import { contactoPage } from './pages/contacto'
 import { homePage } from './pages/home'
 import { notFoundPage } from './pages/not-found'
+import { sedesPage } from './pages/sedes'
 import { serviciosPage } from './pages/servicios'
 
 type RouteHandler = () => string
@@ -8,6 +9,7 @@ type RouteHandler = () => string
 const routes: Record<string, RouteHandler> = {
   '/': homePage,
   '/contacto': contactoPage,
+  '/sedes': sedesPage,
   '/servicios': serviciosPage,
 }
 
