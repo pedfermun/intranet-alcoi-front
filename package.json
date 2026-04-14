@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "beercss": "^4.0.20",
+    "highlight.js": "^11.11.1",
     "lucide": "^1.8.0",
+    "marked": "^18.0.0",
     "material-dynamic-colors": "^1.1.4"
   }
 }

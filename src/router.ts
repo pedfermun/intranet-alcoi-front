@@ -4,6 +4,7 @@ import { notFoundPage } from './pages/not-found'
 import { sedesPage } from './pages/sedes'
 import { serviciosPage } from './pages/servicios'
 import { servidoresPage, wireServidoresPage } from './pages/servidores'
+import { chatbotPage, wireChatbotPage } from './pages/chatbot'
 import { hydrateIcons } from './components/icons'
 import { wireTopbar } from './components/topbar'
 
@@ -18,6 +19,7 @@ const routes: Record<string, Route> = {
   '/sedes':      { render: sedesPage },
   '/contacto':   { render: contactoPage,   wire: wireContactoPage },
   '/servidores': { render: servidoresPage, wire: wireServidoresPage },
+  '/chatbot':    { render: chatbotPage,    wire: wireChatbotPage },
 }
 
 function renderRoute() {

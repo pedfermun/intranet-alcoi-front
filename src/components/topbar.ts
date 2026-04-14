@@ -8,6 +8,7 @@ const navItems: NavItem[] = [
   { href: '/sedes',      label: 'Sedes',      icon: 'map-pin' },
   { href: '/contacto',   label: 'Directorio', icon: 'users' },
   { href: '/servidores', label: 'Servidores', icon: 'server' },
+  { href: '/chatbot',    label: 'Chatbot',    icon: 'bot' },
 ]
 
 export function topbar(currentPath: string): string {
