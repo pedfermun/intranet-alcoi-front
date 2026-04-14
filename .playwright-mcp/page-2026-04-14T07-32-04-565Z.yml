@@ -1,0 +1,590 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - link "Intranet Alcoi" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e8]
+        - generic [ref=e12]: Intranet Alcoi
+      - navigation "Navegación principal" [ref=e13]:
+        - link "Inicio" [ref=e14] [cursor=pointer]:
+          - /url: /
+          - img [ref=e15]
+          - generic [ref=e18]: Inicio
+        - link "Servicios" [ref=e19] [cursor=pointer]:
+          - /url: /servicios
+          - img [ref=e20]
+          - generic [ref=e25]: Servicios
+        - link "Sedes" [ref=e26] [cursor=pointer]:
+          - /url: /sedes
+          - img [ref=e27]
+          - generic [ref=e30]: Sedes
+        - link "Directorio" [ref=e31] [cursor=pointer]:
+          - /url: /contacto
+          - img [ref=e32]
+          - generic [ref=e37]: Directorio
+        - link "Servidores" [ref=e38] [cursor=pointer]:
+          - /url: /servidores
+          - img [ref=e39]
+          - generic [ref=e42]: Servidores
+      - generic [ref=e43]:
+        - button "Buscar" [ref=e44]:
+          - img [ref=e45]
+        - button "Notificaciones" [ref=e48]:
+          - img [ref=e49]
+        - generic [ref=e53]:
+          - img "Avatar" [ref=e54]
+          - generic [ref=e55]:
+            - paragraph [ref=e56]: P. Fernández
+            - paragraph [ref=e57]: ASIX 1º
+  - main [ref=e58]:
+    - generic [ref=e59]:
+      - generic [ref=e61]:
+        - generic [ref=e62]:
+          - generic [ref=e63]:
+            - img [ref=e64]
+            - generic [ref=e66]: Monitorización
+          - heading "Estado de servidores" [level=1] [ref=e67]
+          - paragraph [ref=e68]: Dashboard en tiempo real de la infraestructura del instituto. Rendimiento, servicios y disponibilidad en un solo lugar.
+        - generic [ref=e69]:
+          - button "Exportar" [ref=e70]:
+            - img [ref=e71]
+            - text: Exportar
+          - button "Actualizar" [ref=e74]:
+            - img [ref=e75]
+            - text: Actualizar
+      - generic [ref=e80]:
+        - article [ref=e81]:
+          - img [ref=e83]
+          - generic [ref=e86]:
+            - paragraph [ref=e87]: Servidores totales
+            - paragraph [ref=e88]: "8"
+        - article [ref=e89]:
+          - img [ref=e91]
+          - generic [ref=e94]:
+            - paragraph [ref=e95]: Operativos
+            - paragraph [ref=e96]: "4"
+        - article [ref=e97]:
+          - img [ref=e99]
+          - generic [ref=e101]:
+            - paragraph [ref=e102]: Con avisos
+            - paragraph [ref=e103]: "3"
+        - article [ref=e104]:
+          - img [ref=e106]
+          - generic [ref=e108]:
+            - paragraph [ref=e109]: En mantenimiento
+            - paragraph [ref=e110]: "1"
+      - generic [ref=e112]:
+        - generic [ref=e113]:
+          - img [ref=e115]
+          - textbox "Hostname, IP o rol…" [ref=e118]
+        - combobox [ref=e119]:
+          - option "Todas las sedes" [selected]
+          - option "Alcoy"
+          - option "Barcelona"
+          - option "Vigo"
+          - option "Madrid"
+        - combobox [ref=e120]:
+          - option "Todos los estados" [selected]
+          - option "Operativo"
+          - option "Aviso"
+          - option "Crítico"
+          - option "Mantenimiento"
+        - combobox [ref=e121]:
+          - 'option "Ordenar: Hostname" [selected]'
+          - 'option "Ordenar: Sede"'
+          - 'option "Ordenar: Estado"'
+          - 'option "Ordenar: Uptime"'
+      - generic [ref=e122]:
+        - article [ref=e123]:
+          - generic [ref=e124]:
+            - img [ref=e126]
+            - generic [ref=e129]:
+              - heading "SRV-WEB-ALC01" [level=3] [ref=e130]
+              - paragraph [ref=e131]: Web Server
+            - generic [ref=e132]: Operativo
+          - generic [ref=e134]:
+            - generic [ref=e135]:
+              - img [ref=e137]
+              - text: 192.168.1.10
+            - generic [ref=e142]:
+              - img [ref=e144]
+              - text: Ubuntu Server 22.04 LTS
+            - generic [ref=e147]:
+              - img [ref=e149]
+              - text: Alcoy
+            - generic [ref=e152]:
+              - img [ref=e154]
+              - text: 15 días, 8 horas
+          - generic [ref=e157]:
+            - paragraph [ref=e158]: Servicios
+            - generic [ref=e159]:
+              - generic [ref=e160]: Apache2
+              - generic [ref=e161]: MySQL
+              - generic [ref=e162]: PHP 8.1
+          - generic [ref=e163]:
+            - generic [ref=e165]:
+              - generic [ref=e166]:
+                - img [ref=e167]
+                - text: CPU
+              - generic [ref=e170]: 25%
+            - generic [ref=e174]:
+              - generic [ref=e175]:
+                - img [ref=e176]
+                - text: RAM
+              - generic [ref=e178]: 60%
+            - generic [ref=e182]:
+              - generic [ref=e183]:
+                - img [ref=e184]
+                - text: Disco
+              - generic [ref=e186]: 45%
+          - generic [ref=e189]:
+            - generic [ref=e190]:
+              - img [ref=e191]
+              - text: 10/04/2026, 09:30
+            - generic [ref=e194]:
+              - button "Detalles" [ref=e195]:
+                - img [ref=e196]
+                - text: Detalles
+              - button "Reiniciar" [ref=e198]:
+                - img [ref=e199]
+              - button "SSH" [ref=e202]:
+                - img [ref=e203]
+                - text: SSH
+        - article [ref=e205]:
+          - generic [ref=e206]:
+            - img [ref=e208]
+            - generic [ref=e211]:
+              - heading "SRV-DB-BCN01" [level=3] [ref=e212]
+              - paragraph [ref=e213]: Database Server
+            - generic [ref=e214]: Operativo
+          - generic [ref=e216]:
+            - generic [ref=e217]:
+              - img [ref=e219]
+              - text: 192.168.2.20
+            - generic [ref=e224]:
+              - img [ref=e226]
+              - text: CentOS 8
+            - generic [ref=e229]:
+              - img [ref=e231]
+              - text: Barcelona
+            - generic [ref=e234]:
+              - img [ref=e236]
+              - text: 22 días, 14 horas
+          - generic [ref=e239]:
+            - paragraph [ref=e240]: Servicios
+            - generic [ref=e241]:
+              - generic [ref=e242]: PostgreSQL
+              - generic [ref=e243]: Redis
+              - generic [ref=e244]: MongoDB
+          - generic [ref=e245]:
+            - generic [ref=e247]:
+              - generic [ref=e248]:
+                - img [ref=e249]
+                - text: CPU
+              - generic [ref=e252]: 35%
+            - generic [ref=e256]:
+              - generic [ref=e257]:
+                - img [ref=e258]
+                - text: RAM
+              - generic [ref=e260]: 75%
+            - generic [ref=e264]:
+              - generic [ref=e265]:
+                - img [ref=e266]
+                - text: Disco
+              - generic [ref=e268]: 30%
+          - generic [ref=e271]:
+            - generic [ref=e272]:
+              - img [ref=e273]
+              - text: 12/04/2026, 14:15
+            - generic [ref=e276]:
+              - button "Detalles" [ref=e277]:
+                - img [ref=e278]
+                - text: Detalles
+              - button "Reiniciar" [ref=e280]:
+                - img [ref=e281]
+              - button "SSH" [ref=e284]:
+                - img [ref=e285]
+                - text: SSH
+        - article [ref=e287]:
+          - generic [ref=e288]:
+            - img [ref=e290]
+            - generic [ref=e293]:
+              - heading "SRV-APP-VIG01" [level=3] [ref=e294]
+              - paragraph [ref=e295]: Application Server
+            - generic [ref=e296]: Aviso
+          - generic [ref=e298]:
+            - generic [ref=e299]:
+              - img [ref=e301]
+              - text: 192.168.3.15
+            - generic [ref=e306]:
+              - img [ref=e308]
+              - text: Windows Server 2022
+            - generic [ref=e311]:
+              - img [ref=e313]
+              - text: Vigo
+            - generic [ref=e316]:
+              - img [ref=e318]
+              - text: 8 días, 6 horas
+          - generic [ref=e321]:
+            - paragraph [ref=e322]: Servicios
+            - generic [ref=e323]:
+              - generic [ref=e324]: IIS
+              - generic [ref=e325]: SQL Server
+              - generic [ref=e326]: .NET Runtime
+          - generic [ref=e327]:
+            - generic [ref=e329]:
+              - generic [ref=e330]:
+                - img [ref=e331]
+                - text: CPU
+              - generic [ref=e334]: 80%
+            - generic [ref=e338]:
+              - generic [ref=e339]:
+                - img [ref=e340]
+                - text: RAM
+              - generic [ref=e342]: 85%
+            - generic [ref=e346]:
+              - generic [ref=e347]:
+                - img [ref=e348]
+                - text: Disco
+              - generic [ref=e350]: 70%
+          - generic [ref=e353]:
+            - generic [ref=e354]:
+              - img [ref=e355]
+              - text: 11/04/2026, 16:45
+            - generic [ref=e358]:
+              - button "Detalles" [ref=e359]:
+                - img [ref=e360]
+                - text: Detalles
+              - button "Reiniciar" [ref=e362]:
+                - img [ref=e363]
+              - button "SSH" [ref=e366]:
+                - img [ref=e367]
+                - text: SSH
+        - article [ref=e369]:
+          - generic [ref=e370]:
+            - img [ref=e372]
+            - generic [ref=e375]:
+              - heading "SRV-BACKUP-MAD01" [level=3] [ref=e376]
+              - paragraph [ref=e377]: Backup Server
+            - generic [ref=e378]: Operativo
+          - generic [ref=e380]:
+            - generic [ref=e381]:
+              - img [ref=e383]
+              - text: 192.168.4.25
+            - generic [ref=e388]:
+              - img [ref=e390]
+              - text: Debian 11
+            - generic [ref=e393]:
+              - img [ref=e395]
+              - text: Madrid
+            - generic [ref=e398]:
+              - img [ref=e400]
+              - text: 30 días, 12 horas
+          - generic [ref=e403]:
+            - paragraph [ref=e404]: Servicios
+            - generic [ref=e405]:
+              - generic [ref=e406]: Bacula
+              - generic [ref=e407]: NFS
+              - generic [ref=e408]: SSH
+          - generic [ref=e409]:
+            - generic [ref=e411]:
+              - generic [ref=e412]:
+                - img [ref=e413]
+                - text: CPU
+              - generic [ref=e416]: 15%
+            - generic [ref=e420]:
+              - generic [ref=e421]:
+                - img [ref=e422]
+                - text: RAM
+              - generic [ref=e424]: 40%
+            - generic [ref=e428]:
+              - generic [ref=e429]:
+                - img [ref=e430]
+                - text: Disco
+              - generic [ref=e432]: 85%
+          - generic [ref=e435]:
+            - generic [ref=e436]:
+              - img [ref=e437]
+              - text: 09/04/2026, 08:00
+            - generic [ref=e440]:
+              - button "Detalles" [ref=e441]:
+                - img [ref=e442]
+                - text: Detalles
+              - button "Reiniciar" [ref=e444]:
+                - img [ref=e445]
+              - button "SSH" [ref=e448]:
+                - img [ref=e449]
+                - text: SSH
+        - article [ref=e451]:
+          - generic [ref=e452]:
+            - img [ref=e454]
+            - generic [ref=e457]:
+              - heading "SRV-MAIL-ALC02" [level=3] [ref=e458]
+              - paragraph [ref=e459]: Mail Server
+            - generic [ref=e460]: Crítico
+          - generic [ref=e462]:
+            - generic [ref=e463]:
+              - img [ref=e465]
+              - text: 192.168.1.50
+            - generic [ref=e470]:
+              - img [ref=e472]
+              - text: Ubuntu Server 20.04 LTS
+            - generic [ref=e475]:
+              - img [ref=e477]
+              - text: Alcoy
+            - generic [ref=e480]:
+              - img [ref=e482]
+              - text: 2 días, 4 horas
+          - generic [ref=e485]:
+            - paragraph [ref=e486]: Servicios
+            - generic [ref=e487]:
+              - generic [ref=e488]: Postfix
+              - generic [ref=e489]: Dovecot
+          - generic [ref=e490]:
+            - generic [ref=e492]:
+              - generic [ref=e493]:
+                - img [ref=e494]
+                - text: CPU
+              - generic [ref=e497]: 95%
+            - generic [ref=e501]:
+              - generic [ref=e502]:
+                - img [ref=e503]
+                - text: RAM
+              - generic [ref=e505]: 90%
+            - generic [ref=e509]:
+              - generic [ref=e510]:
+                - img [ref=e511]
+                - text: Disco
+              - generic [ref=e513]: 95%
+          - generic [ref=e516]:
+            - generic [ref=e517]:
+              - img [ref=e518]
+              - text: 13/04/2026, 07:20
+            - generic [ref=e521]:
+              - button "Detalles" [ref=e522]:
+                - img [ref=e523]
+                - text: Detalles
+              - button "Reiniciar" [ref=e525]:
+                - img [ref=e526]
+              - button "SSH" [ref=e529]:
+                - img [ref=e530]
+                - text: SSH
+        - article [ref=e532]:
+          - generic [ref=e533]:
+            - img [ref=e535]
+            - generic [ref=e538]:
+              - heading "SRV-MONITORING-BCN02" [level=3] [ref=e539]
+              - paragraph [ref=e540]: Monitoring Server
+            - generic [ref=e541]: Mantenimiento
+          - generic [ref=e543]:
+            - generic [ref=e544]:
+              - img [ref=e546]
+              - text: 192.168.2.30
+            - generic [ref=e551]:
+              - img [ref=e553]
+              - text: CentOS 9
+            - generic [ref=e556]:
+              - img [ref=e558]
+              - text: Barcelona
+            - generic [ref=e561]:
+              - img [ref=e563]
+              - text: 45 días, 18 horas
+          - generic [ref=e566]:
+            - paragraph [ref=e567]: Servicios
+            - generic [ref=e568]:
+              - generic [ref=e569]: Nagios
+              - generic [ref=e570]: Grafana
+              - generic [ref=e571]: Prometheus
+          - generic [ref=e572]:
+            - generic [ref=e574]:
+              - generic [ref=e575]:
+                - img [ref=e576]
+                - text: CPU
+              - generic [ref=e579]: 20%
+            - generic [ref=e583]:
+              - generic [ref=e584]:
+                - img [ref=e585]
+                - text: RAM
+              - generic [ref=e587]: 55%
+            - generic [ref=e591]:
+              - generic [ref=e592]:
+                - img [ref=e593]
+                - text: Disco
+              - generic [ref=e595]: 25%
+          - generic [ref=e598]:
+            - generic [ref=e599]:
+              - img [ref=e600]
+              - text: 08/04/2026, 10:30
+            - generic [ref=e603]:
+              - button "Detalles" [ref=e604]:
+                - img [ref=e605]
+                - text: Detalles
+              - button "Reiniciar" [ref=e607]:
+                - img [ref=e608]
+              - button "SSH" [ref=e611]:
+                - img [ref=e612]
+                - text: SSH
+        - article [ref=e614]:
+          - generic [ref=e615]:
+            - img [ref=e617]
+            - generic [ref=e620]:
+              - heading "SRV-FILE-VIG02" [level=3] [ref=e621]
+              - paragraph [ref=e622]: File Server
+            - generic [ref=e623]: Operativo
+          - generic [ref=e625]:
+            - generic [ref=e626]:
+              - img [ref=e628]
+              - text: 192.168.3.40
+            - generic [ref=e633]:
+              - img [ref=e635]
+              - text: FreeBSD 13
+            - generic [ref=e638]:
+              - img [ref=e640]
+              - text: Vigo
+            - generic [ref=e643]:
+              - img [ref=e645]
+              - text: 18 días, 22 horas
+          - generic [ref=e648]:
+            - paragraph [ref=e649]: Servicios
+            - generic [ref=e650]:
+              - generic [ref=e651]: Samba
+              - generic [ref=e652]: NFS
+              - generic [ref=e653]: FTP
+          - generic [ref=e654]:
+            - generic [ref=e656]:
+              - generic [ref=e657]:
+                - img [ref=e658]
+                - text: CPU
+              - generic [ref=e661]: 10%
+            - generic [ref=e665]:
+              - generic [ref=e666]:
+                - img [ref=e667]
+                - text: RAM
+              - generic [ref=e669]: 30%
+            - generic [ref=e673]:
+              - generic [ref=e674]:
+                - img [ref=e675]
+                - text: Disco
+              - generic [ref=e677]: 60%
+          - generic [ref=e680]:
+            - generic [ref=e681]:
+              - img [ref=e682]
+              - text: 10/04/2026, 12:00
+            - generic [ref=e685]:
+              - button "Detalles" [ref=e686]:
+                - img [ref=e687]
+                - text: Detalles
+              - button "Reiniciar" [ref=e689]:
+                - img [ref=e690]
+              - button "SSH" [ref=e693]:
+                - img [ref=e694]
+                - text: SSH
+        - article [ref=e696]:
+          - generic [ref=e697]:
+            - img [ref=e699]
+            - generic [ref=e702]:
+              - heading "SRV-PROXY-MAD02" [level=3] [ref=e703]
+              - paragraph [ref=e704]: Proxy Server
+            - generic [ref=e705]: Aviso
+          - generic [ref=e707]:
+            - generic [ref=e708]:
+              - img [ref=e710]
+              - text: 192.168.4.35
+            - generic [ref=e715]:
+              - img [ref=e717]
+              - text: Ubuntu Server 22.04 LTS
+            - generic [ref=e720]:
+              - img [ref=e722]
+              - text: Madrid
+            - generic [ref=e725]:
+              - img [ref=e727]
+              - text: 12 días, 3 horas
+          - generic [ref=e730]:
+            - paragraph [ref=e731]: Servicios
+            - generic [ref=e732]:
+              - generic [ref=e733]: Squid
+              - generic [ref=e734]: HAProxy
+              - generic [ref=e735]: Fail2Ban
+          - generic [ref=e736]:
+            - generic [ref=e738]:
+              - generic [ref=e739]:
+                - img [ref=e740]
+                - text: CPU
+              - generic [ref=e743]: 70%
+            - generic [ref=e747]:
+              - generic [ref=e748]:
+                - img [ref=e749]
+                - text: RAM
+              - generic [ref=e751]: 80%
+            - generic [ref=e755]:
+              - generic [ref=e756]:
+                - img [ref=e757]
+                - text: Disco
+              - generic [ref=e759]: 40%
+          - generic [ref=e762]:
+            - generic [ref=e763]:
+              - img [ref=e764]
+              - text: 12/04/2026, 11:45
+            - generic [ref=e767]:
+              - button "Detalles" [ref=e768]:
+                - img [ref=e769]
+                - text: Detalles
+              - button "Reiniciar" [ref=e771]:
+                - img [ref=e772]
+              - button "SSH" [ref=e775]:
+                - img [ref=e776]
+                - text: SSH
+      - generic [ref=e778]:
+        - article [ref=e779]:
+          - generic [ref=e780]:
+            - img [ref=e782]
+            - heading "Sistema de monitorización" [level=3] [ref=e784]
+          - list [ref=e785]:
+            - listitem [ref=e786]:
+              - img [ref=e788]
+              - text: Los datos se refrescan cada 5 minutos desde la base central.
+            - listitem [ref=e793]:
+              - img [ref=e795]
+              - text: Notificaciones automáticas por email y Telegram ante incidencias críticas.
+            - listitem [ref=e798]:
+              - img [ref=e800]
+              - text: 30 días de histórico almacenado para análisis de tendencias.
+            - listitem [ref=e804]:
+              - img [ref=e806]
+              - text: API REST disponible en
+              - code [ref=e808]: /api/servidores/status
+              - text: .
+        - article [ref=e809]:
+          - generic [ref=e810]:
+            - img [ref=e812]
+            - heading "Leyenda de estados" [level=3] [ref=e816]
+          - list [ref=e817]:
+            - listitem [ref=e818]:
+              - generic [ref=e820]: "Operativo:"
+              - generic [ref=e821]: Todo operativo, métricas normales.
+            - listitem [ref=e822]:
+              - generic [ref=e824]: "Aviso:"
+              - generic [ref=e825]: Requiere atención, métricas elevadas.
+            - listitem [ref=e826]:
+              - generic [ref=e828]: "Crítico:"
+              - generic [ref=e829]: Problema grave, acción inmediata.
+            - listitem [ref=e830]:
+              - generic [ref=e832]: "Mantenimiento:"
+              - generic [ref=e833]: Fuera de servicio por mantenimiento.
+  - contentinfo [ref=e834]:
+    - generic [ref=e835]:
+      - paragraph [ref=e836]:
+        - img [ref=e837]
+        - text: © 2026 Institut d'Alcoi · Intranet corporativa
+      - generic [ref=e841]:
+        - link "Privacidad" [ref=e842] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e843]
+          - text: Privacidad
+        - link "Soporte" [ref=e846] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e847]
+          - text: Soporte
+        - link "GitHub" [ref=e854] [cursor=pointer]:
+          - /url: "#"
+          - text: GitHub

@@ -1,0 +1,208 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - link "Intranet Alcoi" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e8]
+        - generic [ref=e12]: Intranet Alcoi
+      - navigation "Navegación principal" [ref=e13]:
+        - link "Inicio" [ref=e14] [cursor=pointer]:
+          - /url: /
+          - img [ref=e15]
+          - generic [ref=e18]: Inicio
+        - link "Servicios" [ref=e19] [cursor=pointer]:
+          - /url: /servicios
+          - img [ref=e20]
+          - generic [ref=e25]: Servicios
+        - link "Sedes" [ref=e26] [cursor=pointer]:
+          - /url: /sedes
+          - img [ref=e27]
+          - generic [ref=e30]: Sedes
+        - link "Directorio" [ref=e31] [cursor=pointer]:
+          - /url: /contacto
+          - img [ref=e32]
+          - generic [ref=e37]: Directorio
+        - link "Servidores" [ref=e38] [cursor=pointer]:
+          - /url: /servidores
+          - img [ref=e39]
+          - generic [ref=e42]: Servidores
+      - generic [ref=e43]:
+        - button "Buscar" [ref=e44]:
+          - img [ref=e45]
+        - button "Notificaciones" [ref=e48]:
+          - img [ref=e49]
+        - generic [ref=e53]:
+          - img "Avatar" [ref=e54]
+          - generic [ref=e55]:
+            - paragraph [ref=e56]: P. Fernández
+            - paragraph [ref=e57]: ASIX 1º
+  - main [ref=e58]:
+    - generic [ref=e59]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - img [ref=e65]
+            - text: Portal corporativo
+          - heading "Bienvenido a la Intranet del Institut d'Alcoi" [level=1] [ref=e68]
+          - paragraph [ref=e69]: Accede a los servicios internos, consulta el estado de la infraestructura y encuentra a tus compañeros del equipo ASIX 1º.
+          - generic [ref=e70]:
+            - link "Ver servicios" [ref=e71] [cursor=pointer]:
+              - /url: /servicios
+              - img [ref=e72]
+              - text: Ver servicios
+            - link "Estado de sistemas" [ref=e77] [cursor=pointer]:
+              - /url: /servidores
+              - img [ref=e78]
+              - text: Estado de sistemas
+        - generic [ref=e83]:
+          - paragraph [ref=e84]: Infraestructura hoy
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - paragraph [ref=e87]: "4"
+              - paragraph [ref=e88]: Servidores operativos
+            - generic [ref=e89]:
+              - paragraph [ref=e90]: "3"
+              - paragraph [ref=e91]: Requieren atención
+            - generic [ref=e92]:
+              - paragraph [ref=e93]: "4"
+              - paragraph [ref=e94]: Sedes activas
+            - generic [ref=e95]:
+              - paragraph [ref=e96]: "5"
+              - paragraph [ref=e97]: Miembros equipo
+      - generic [ref=e98]:
+        - article [ref=e99]:
+          - img [ref=e101]
+          - generic [ref=e106]:
+            - paragraph [ref=e107]: Servicios activos
+            - paragraph [ref=e108]: "8"
+        - article [ref=e109]:
+          - img [ref=e111]
+          - generic [ref=e114]:
+            - paragraph [ref=e115]: Operativos
+            - paragraph [ref=e116]: "4"
+            - paragraph [ref=e117]: En los últimos 15 min
+        - article [ref=e118]:
+          - img [ref=e120]
+          - generic [ref=e122]:
+            - paragraph [ref=e123]: Con incidencia
+            - paragraph [ref=e124]: "3"
+        - article [ref=e125]:
+          - img [ref=e127]
+          - generic [ref=e130]:
+            - paragraph [ref=e131]: Sedes conectadas
+            - paragraph [ref=e132]: "4"
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - generic [ref=e135]:
+            - heading "Accesos rápidos" [level=2] [ref=e136]
+            - paragraph [ref=e137]: Los servicios que más usa tu equipo.
+          - link "Ver todos" [ref=e138] [cursor=pointer]:
+            - /url: /servicios
+            - text: Ver todos
+            - img [ref=e139]
+        - generic [ref=e141]:
+          - link "Correo Corporativo Acceso al buzón institucional y calendario compartido." [ref=e142] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e144]
+            - heading "Correo Corporativo" [level=3] [ref=e147]
+            - paragraph [ref=e148]: Acceso al buzón institucional y calendario compartido.
+          - link "Gestor Documental Repositorio centralizado de actas, plantillas y normativa." [ref=e149] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e151]
+            - heading "Gestor Documental" [level=3] [ref=e153]
+            - paragraph [ref=e154]: Repositorio centralizado de actas, plantillas y normativa.
+          - link "Aula Virtual Plataforma Moodle para cursos, tareas y evaluaciones." [ref=e155] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e157]
+            - heading "Aula Virtual" [level=3] [ref=e160]
+            - paragraph [ref=e161]: Plataforma Moodle para cursos, tareas y evaluaciones.
+          - link "Mesa de Ayuda Sistema de tickets para incidencias informáticas." [ref=e162] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e164]
+            - heading "Mesa de Ayuda" [level=3] [ref=e171]
+            - paragraph [ref=e172]: Sistema de tickets para incidencias informáticas.
+      - generic [ref=e173]:
+        - article [ref=e174]:
+          - generic [ref=e175]:
+            - generic [ref=e176]:
+              - heading "Actividad reciente" [level=2] [ref=e177]
+              - paragraph [ref=e178]: Últimas acciones en la plataforma.
+            - button "Actualizar" [ref=e179]:
+              - img [ref=e180]
+              - text: Actualizar
+          - list [ref=e185]:
+            - listitem [ref=e186]:
+              - img [ref=e188]
+              - generic [ref=e191]:
+                - paragraph [ref=e192]: SRV-WEB-ALC01 completó su backup diario correctamente.
+                - paragraph [ref=e193]: Hace 5 min
+            - listitem [ref=e194]:
+              - img [ref=e196]
+              - generic [ref=e198]:
+                - paragraph [ref=e199]: SRV-MAIL-ALC02 alcanzó el 95% de uso de disco.
+                - paragraph [ref=e200]: Hace 27 min
+            - listitem [ref=e201]:
+              - img [ref=e203]
+              - generic [ref=e206]:
+                - paragraph [ref=e207]: Pablo Fernández actualizó su perfil en el directorio.
+                - paragraph [ref=e208]: Hace 2 h
+            - listitem [ref=e209]:
+              - img [ref=e211]
+              - generic [ref=e214]:
+                - paragraph [ref=e215]: Reunión de seguimiento ASIX 1º agendada para el viernes.
+                - paragraph [ref=e216]: Ayer
+        - article [ref=e217]:
+          - generic [ref=e218]:
+            - heading "Tu equipo" [level=2] [ref=e219]
+            - link "Directorio" [ref=e220] [cursor=pointer]:
+              - /url: /contacto
+          - list [ref=e221]:
+            - listitem [ref=e222]:
+              - img "Aitor Brotons" [ref=e223]
+              - generic [ref=e224]:
+                - paragraph [ref=e225]: Aitor Brotons
+                - paragraph [ref=e226]: Desarrollador Frontend
+              - link "Enviar email" [ref=e227] [cursor=pointer]:
+                - /url: mailto:aitor.brotons@institut-alcoi.com
+                - img [ref=e228]
+            - listitem [ref=e231]:
+              - img "Pablo Vañó" [ref=e232]
+              - generic [ref=e233]:
+                - paragraph [ref=e234]: Pablo Vañó
+                - paragraph [ref=e235]: Desarrollador Backend
+              - link "Enviar email" [ref=e236] [cursor=pointer]:
+                - /url: mailto:pablo.vano@institut-alcoi.com
+                - img [ref=e237]
+            - listitem [ref=e240]:
+              - img "Victor Tamajón" [ref=e241]
+              - generic [ref=e242]:
+                - paragraph [ref=e243]: Victor Tamajón
+                - paragraph [ref=e244]: Diseñador UX/UI
+              - link "Enviar email" [ref=e245] [cursor=pointer]:
+                - /url: mailto:victor.tamajon@institut-alcoi.com
+                - img [ref=e246]
+            - listitem [ref=e249]:
+              - img "Diego Pérez" [ref=e250]
+              - generic [ref=e251]:
+                - paragraph [ref=e252]: Diego Pérez
+                - paragraph [ref=e253]: Administrador de Sistemas
+              - link "Enviar email" [ref=e254] [cursor=pointer]:
+                - /url: mailto:diego.perez@institut-alcoi.com
+                - img [ref=e255]
+  - contentinfo [ref=e258]:
+    - generic [ref=e259]:
+      - paragraph [ref=e260]:
+        - img [ref=e261]
+        - text: © 2026 Institut d'Alcoi · Intranet corporativa
+      - generic [ref=e265]:
+        - link "Privacidad" [ref=e266] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e267]
+          - text: Privacidad
+        - link "Soporte" [ref=e270] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e271]
+          - text: Soporte
+        - link "GitHub" [ref=e278] [cursor=pointer]:
+          - /url: "#"
+          - text: GitHub

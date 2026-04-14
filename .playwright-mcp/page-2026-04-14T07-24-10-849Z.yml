@@ -1,0 +1,313 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - link "Intranet Alcoi" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e8]
+        - generic [ref=e12]: Intranet Alcoi
+      - navigation "Navegación principal" [ref=e13]:
+        - link "Inicio" [ref=e14] [cursor=pointer]:
+          - /url: /
+          - img [ref=e15]
+          - generic [ref=e18]: Inicio
+        - link "Servicios" [ref=e19] [cursor=pointer]:
+          - /url: /servicios
+          - img [ref=e20]
+          - generic [ref=e25]: Servicios
+        - link "Sedes" [ref=e26] [cursor=pointer]:
+          - /url: /sedes
+          - img [ref=e27]
+          - generic [ref=e30]: Sedes
+        - link "Directorio" [ref=e31] [cursor=pointer]:
+          - /url: /contacto
+          - img [ref=e32]
+          - generic [ref=e37]: Directorio
+        - link "Servidores" [ref=e38] [cursor=pointer]:
+          - /url: /servidores
+          - img [ref=e39]
+          - generic [ref=e42]: Servidores
+      - generic [ref=e43]:
+        - button "Buscar" [ref=e44]:
+          - img [ref=e45]
+        - button "Notificaciones" [ref=e48]:
+          - img [ref=e49]
+        - generic [ref=e53]:
+          - img "Avatar" [ref=e54]
+          - generic [ref=e55]:
+            - paragraph [ref=e56]: P. Fernández
+            - paragraph [ref=e57]: ASIX 1º
+  - main [ref=e58]:
+    - generic [ref=e59]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - img [ref=e64]
+          - generic [ref=e67]: Red de sedes
+        - heading "Sedes del proyecto ASIX 1º" [level=1] [ref=e68]
+        - paragraph [ref=e69]: Equipo distribuido entre cuatro comunidades autónomas. Explora cada sede, sus especialidades y su localización.
+      - generic [ref=e70]:
+        - article [ref=e71]:
+          - img [ref=e73]
+          - generic [ref=e78]:
+            - paragraph [ref=e79]: Estudiantes totales
+            - paragraph [ref=e80]: "20"
+        - article [ref=e81]:
+          - img [ref=e83]
+          - generic [ref=e87]:
+            - paragraph [ref=e88]: Sedes activas
+            - paragraph [ref=e89]: "4"
+        - article [ref=e90]:
+          - img [ref=e92]
+          - generic [ref=e94]:
+            - paragraph [ref=e95]: Especialidades
+            - paragraph [ref=e96]: "8"
+        - article [ref=e97]:
+          - img [ref=e99]
+          - generic [ref=e104]:
+            - paragraph [ref=e105]: Comunidades autónomas
+            - paragraph [ref=e106]: "4"
+      - generic [ref=e107]:
+        - article [ref=e108]:
+          - generic [ref=e109]:
+            - img "Institut d'Alcoi" [ref=e110]
+            - generic [ref=e112]:
+              - paragraph [ref=e113]: Alcoy
+              - heading "Institut d'Alcoi" [level=3] [ref=e114]
+            - generic [ref=e115]:
+              - img [ref=e116]
+              - text: "5"
+          - generic [ref=e121]:
+            - paragraph [ref=e122]: Sede principal del proyecto. Centro educativo de referencia en la comarca de l'Alcoià.
+            - generic [ref=e123]:
+              - generic [ref=e124]:
+                - img [ref=e126]
+                - generic [ref=e129]: C/ Sant Nicolau, 1, 03801 Alcoy, Alicante
+              - generic [ref=e130]:
+                - img [ref=e132]
+                - link "+34 965 123 456" [ref=e134] [cursor=pointer]:
+                  - /url: tel:+34 965 123 456
+              - generic [ref=e135]:
+                - img [ref=e137]
+                - link "info@institut-alcoi.com" [ref=e140] [cursor=pointer]:
+                  - /url: mailto:info@institut-alcoi.com
+              - generic [ref=e141]:
+                - img [ref=e143]
+                - generic [ref=e146]: 38.6983°N, 0.4739°W
+            - generic [ref=e147]:
+              - paragraph [ref=e148]: Especialidades
+              - generic [ref=e149]:
+                - generic [ref=e150]: ASIX
+                - generic [ref=e151]: DAM
+                - generic [ref=e152]: DAW
+                - generic [ref=e153]: SMX
+            - generic [ref=e154]:
+              - button "Ver mapa" [ref=e155]:
+                - img [ref=e156]
+                - text: Ver mapa
+              - button "Contactar" [ref=e158]:
+                - img [ref=e159]
+                - text: Contactar
+              - button "Galería" [ref=e161]:
+                - img [ref=e162]
+                - text: Galería
+        - article [ref=e166]:
+          - generic [ref=e167]:
+            - img "Institut de Barcelona" [ref=e168]
+            - generic [ref=e170]:
+              - paragraph [ref=e171]: Barcelona
+              - heading "Institut de Barcelona" [level=3] [ref=e172]
+            - generic [ref=e173]:
+              - img [ref=e174]
+              - text: "6"
+          - generic [ref=e179]:
+            - paragraph [ref=e180]: Sede en el corazón de Barcelona. Conexión directa con el tejido empresarial catalán.
+            - generic [ref=e181]:
+              - generic [ref=e182]:
+                - img [ref=e184]
+                - generic [ref=e187]: Carrer de la Diputació, 100, 08015 Barcelona
+              - generic [ref=e188]:
+                - img [ref=e190]
+                - link "+34 934 567 890" [ref=e192] [cursor=pointer]:
+                  - /url: tel:+34 934 567 890
+              - generic [ref=e193]:
+                - img [ref=e195]
+                - link "barcelona@institut-alcoi.com" [ref=e198] [cursor=pointer]:
+                  - /url: mailto:barcelona@institut-alcoi.com
+              - generic [ref=e199]:
+                - img [ref=e201]
+                - generic [ref=e204]: 41.3851°N, 2.1734°E
+            - generic [ref=e205]:
+              - paragraph [ref=e206]: Especialidades
+              - generic [ref=e207]:
+                - generic [ref=e208]: ASIX
+                - generic [ref=e209]: DAM
+                - generic [ref=e210]: DAW
+                - generic [ref=e211]: SMX
+                - generic [ref=e212]: Telecomunicaciones
+            - generic [ref=e213]:
+              - button "Ver mapa" [ref=e214]:
+                - img [ref=e215]
+                - text: Ver mapa
+              - button "Contactar" [ref=e217]:
+                - img [ref=e218]
+                - text: Contactar
+              - button "Galería" [ref=e220]:
+                - img [ref=e221]
+                - text: Galería
+        - article [ref=e225]:
+          - generic [ref=e226]:
+            - img "Institut de Vigo" [ref=e227]
+            - generic [ref=e229]:
+              - paragraph [ref=e230]: Vigo
+              - heading "Institut de Vigo" [level=3] [ref=e231]
+            - generic [ref=e232]:
+              - img [ref=e233]
+              - text: "5"
+          - generic [ref=e238]:
+            - paragraph [ref=e239]: Sede gallega especializada en tecnologías del mar y energías renovables.
+            - generic [ref=e240]:
+              - generic [ref=e241]:
+                - img [ref=e243]
+                - generic [ref=e246]: Rúa do Príncipe, 22, 36202 Vigo, Pontevedra
+              - generic [ref=e247]:
+                - img [ref=e249]
+                - link "+34 986 123 789" [ref=e251] [cursor=pointer]:
+                  - /url: tel:+34 986 123 789
+              - generic [ref=e252]:
+                - img [ref=e254]
+                - link "vigo@institut-alcoi.com" [ref=e257] [cursor=pointer]:
+                  - /url: mailto:vigo@institut-alcoi.com
+              - generic [ref=e258]:
+                - img [ref=e260]
+                - generic [ref=e263]: 42.2406°N, 8.7207°W
+            - generic [ref=e264]:
+              - paragraph [ref=e265]: Especialidades
+              - generic [ref=e266]:
+                - generic [ref=e267]: ASIX
+                - generic [ref=e268]: DAM
+                - generic [ref=e269]: DAW
+                - generic [ref=e270]: SMX
+                - generic [ref=e271]: Electrónica
+            - generic [ref=e272]:
+              - button "Ver mapa" [ref=e273]:
+                - img [ref=e274]
+                - text: Ver mapa
+              - button "Contactar" [ref=e276]:
+                - img [ref=e277]
+                - text: Contactar
+              - button "Galería" [ref=e279]:
+                - img [ref=e280]
+                - text: Galería
+        - article [ref=e284]:
+          - generic [ref=e285]:
+            - img "Institut de Madrid" [ref=e286]
+            - generic [ref=e288]:
+              - paragraph [ref=e289]: Madrid
+              - heading "Institut de Madrid" [level=3] [ref=e290]
+            - generic [ref=e291]:
+              - img [ref=e292]
+              - text: "4"
+          - generic [ref=e297]:
+            - paragraph [ref=e298]: Sede central en Madrid. Centro de innovación tecnológica con conexiones internacionales.
+            - generic [ref=e299]:
+              - generic [ref=e300]:
+                - img [ref=e302]
+                - generic [ref=e305]: Calle de la Princesa, 5, 28008 Madrid
+              - generic [ref=e306]:
+                - img [ref=e308]
+                - link "+34 915 678 123" [ref=e310] [cursor=pointer]:
+                  - /url: tel:+34 915 678 123
+              - generic [ref=e311]:
+                - img [ref=e313]
+                - link "madrid@institut-alcoi.com" [ref=e316] [cursor=pointer]:
+                  - /url: mailto:madrid@institut-alcoi.com
+              - generic [ref=e317]:
+                - img [ref=e319]
+                - generic [ref=e322]: 40.4168°N, 3.7038°W
+            - generic [ref=e323]:
+              - paragraph [ref=e324]: Especialidades
+              - generic [ref=e325]:
+                - generic [ref=e326]: ASIX
+                - generic [ref=e327]: DAM
+                - generic [ref=e328]: DAW
+                - generic [ref=e329]: SMX
+                - generic [ref=e330]: Inteligencia Artificial
+                - generic [ref=e331]: Ciberseguridad
+            - generic [ref=e332]:
+              - button "Ver mapa" [ref=e333]:
+                - img [ref=e334]
+                - text: Ver mapa
+              - button "Contactar" [ref=e336]:
+                - img [ref=e337]
+                - text: Contactar
+              - button "Galería" [ref=e339]:
+                - img [ref=e340]
+                - text: Galería
+      - generic [ref=e344]:
+        - article [ref=e345]:
+          - generic [ref=e346]:
+            - img [ref=e348]
+            - heading "Equipo distribuido" [level=3] [ref=e353]
+          - paragraph [ref=e354]: "Estudiantes ASIX 1º repartidos por la geografía española:"
+          - list [ref=e355]:
+            - listitem [ref=e356]:
+              - generic [ref=e357]:
+                - img [ref=e359]
+                - generic [ref=e362]: Alcoy
+              - generic [ref=e363]: 5 estudiantes
+            - listitem [ref=e364]:
+              - generic [ref=e365]:
+                - img [ref=e367]
+                - generic [ref=e370]: Barcelona
+              - generic [ref=e371]: 6 estudiantes
+            - listitem [ref=e372]:
+              - generic [ref=e373]:
+                - img [ref=e375]
+                - generic [ref=e378]: Vigo
+              - generic [ref=e379]: 5 estudiantes
+            - listitem [ref=e380]:
+              - generic [ref=e381]:
+                - img [ref=e383]
+                - generic [ref=e386]: Madrid
+              - generic [ref=e387]: 4 estudiantes
+        - article [ref=e388]:
+          - generic [ref=e389]:
+            - img [ref=e391]
+            - heading "Stack del proyecto" [level=3] [ref=e394]
+          - paragraph [ref=e395]: "Intranet corporativa desarrollada como proyecto final del ciclo formativo:"
+          - generic [ref=e396]:
+            - generic [ref=e397]: TypeScript
+            - generic [ref=e398]: Vite
+            - generic [ref=e399]: Tailwind CSS
+            - generic [ref=e400]: Beer CSS
+            - generic [ref=e401]: Lucide Icons
+            - generic [ref=e402]: SPA Router
+            - generic [ref=e403]: Responsive Design
+      - generic [ref=e404]:
+        - generic [ref=e405]:
+          - generic [ref=e406]:
+            - img [ref=e408]
+            - heading "Ubicación de sedes" [level=2] [ref=e410]
+          - generic [ref=e411]: Visualización esquemática
+        - generic [ref=e412]:
+          - img "Mapa" [ref=e413]
+          - generic [ref=e418]: Alcoy
+          - generic [ref=e423]: Barcelona
+          - generic [ref=e428]: Vigo
+          - generic [ref=e433]: Madrid
+  - contentinfo [ref=e434]:
+    - generic [ref=e435]:
+      - paragraph [ref=e436]:
+        - img [ref=e437]
+        - text: © 2026 Institut d'Alcoi · Intranet corporativa
+      - generic [ref=e441]:
+        - link "Privacidad" [ref=e442] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e443]
+          - text: Privacidad
+        - link "Soporte" [ref=e446] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e447]
+          - text: Soporte
+        - link "GitHub" [ref=e454] [cursor=pointer]:
+          - /url: "#"
+          - text: GitHub
