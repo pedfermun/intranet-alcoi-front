@@ -1,449 +1,161 @@
-export function sedesPage() {
-  // Información de las sedes
-  const sedes = [
-    {
-      id: 1,
-      nombre: "Institut d'Alcoi",
-      ciudad: "Alcoy",
-      direccion: "C/ Sant Nicolau, 1, 03801 Alcoy, Alicante",
-      telefono: "+34 965 123 456",
-      email: "info@institut-alcoi.com",
-      descripcion: "Sede principal del proyecto. Centro educativo de referencia en la comarca de l'Alcoià.",
-      estudiantes: 5,
-      especialidades: ["ASIX", "DAM", "DAW", "SMX"],
-      imagen: "🏫",
-      coordenadas: "38.6983°N, 0.4739°W"
-    },
-    {
-      id: 2,
-      nombre: "Institut de Barcelona",
-      ciudad: "Barcelona",
-      direccion: "Carrer de la Diputació, 100, 08015 Barcelona",
-      telefono: "+34 934 567 890",
-      email: "barcelona@institut-alcoi.com",
-      descripcion: "Sede en el corazón de Barcelona. Conexión directa con el tejido empresarial catalán.",
-      estudiantes: 6,
-      especialidades: ["ASIX", "DAM", "DAW", "SMX", "Telecomunicaciones"],
-      imagen: "🏙️",
-      coordenadas: "41.3851°N, 2.1734°E"
-    },
-    {
-      id: 3,
-      nombre: "Institut de Vigo",
-      ciudad: "Vigo",
-      direccion: "Rúa do Príncipe, 22, 36202 Vigo, Pontevedra",
-      telefono: "+34 986 123 789",
-      email: "vigo@institut-alcoi.com",
-      descripcion: "Sede gallega especializada en tecnologías del mar y energías renovables.",
-      estudiantes: 5,
-      especialidades: ["ASIX", "DAM", "DAW", "SMX", "Electrónica"],
-      imagen: "⚓",
-      coordenadas: "42.2406°N, 8.7207°W"
-    },
-    {
-      id: 4,
-      nombre: "Institut de Madrid",
-      ciudad: "Madrid",
-      direccion: "Calle de la Princesa, 5, 28008 Madrid",
-      telefono: "+34 915 678 123",
-      email: "madrid@institut-alcoi.com",
-      descripcion: "Sede central en Madrid. Centro de innovación tecnológica con conexiones internacionales.",
-      estudiantes: 4,
-      especialidades: ["ASIX", "DAM", "DAW", "SMX", "Inteligencia Artificial", "Ciberseguridad"],
-      imagen: "🏛️",
-      coordenadas: "40.4168°N, 3.7038°W"
-    }
-  ]
+import { layout, pageHeader, statCard } from '../components/layout'
+import { icon } from '../components/icons'
+import { sedes } from '../lib/data'
 
-  return `
-    <div class="layout-shell">
-      <header class="topbar">
-        <a class="brand" href="/" data-link>Intranet Alcoi</a>
-        <nav class="nav">
-          <a href="/" data-link>Inicio</a>
-          <a href="/servicios" data-link>Servicios</a>
-          <a href="/sedes" data-link>Sedes</a>
-          <a href="/contacto" data-link>Directorio</a>
-        </nav>
-      </header>
+export function sedesPage(): string {
+  const totalEstudiantes = sedes.reduce((sum, s) => sum + s.estudiantes, 0)
+  const totalEspecialidades = new Set(sedes.flatMap((s) => s.especialidades)).size
 
-      <main class="page">
-        <section class="page-card">
-          <p class="eyebrow">Nuestras Instalaciones</p>
-          <h1>Sedes del Proyecto ASIX 1º</h1>
-          <p class="lead">
-            Proyecto de práctica ASIX 1º - Desarrollo Web. Conoce las sedes virtuales de nuestro equipo distribuido por toda España.
-          </p>
+  const content = `
+    ${pageHeader({
+      eyebrow: 'Red de sedes',
+      icon: 'map-pin',
+      title: 'Sedes del proyecto ASIX 1º',
+      description:
+        'Equipo distribuido entre cuatro comunidades autónomas. Explora cada sede, sus especialidades y su localización.',
+    })}
 
-          <!-- Estadísticas generales -->
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-number">${sedes.reduce((total, sede) => total + sede.estudiantes, 0)}</div>
-              <div class="stat-label">Estudiantes Totales</div>
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      ${statCard({ label: 'Estudiantes totales',    value: totalEstudiantes,      icon: 'users',     tone: 'brand' })}
+      ${statCard({ label: 'Sedes activas',          value: sedes.length,          icon: 'building-2', tone: 'success' })}
+      ${statCard({ label: 'Especialidades',         value: totalEspecialidades,   icon: 'book-open', tone: 'info' })}
+      ${statCard({ label: 'Comunidades autónomas',  value: 4,                     icon: 'globe-2',   tone: 'warning' })}
+    </section>
+
+    <!-- Sedes grid -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+      ${sedes
+        .map(
+          (s) => `
+        <article class="bg-white rounded-2xl border border-slate-200 elevation-1 hover:elevation-2 transition-all overflow-hidden">
+          <div class="relative h-44">
+            <img src="${s.image}" alt="${s.nombre}" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/10 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <p class="text-xs uppercase tracking-widest text-white/80 font-semibold">${s.ciudad}</p>
+              <h3 class="mt-1 text-xl font-bold tracking-tight">${s.nombre}</h3>
             </div>
-            <div class="stat-card">
-              <div class="stat-number">${sedes.length}</div>
-              <div class="stat-label">Sedes Activas</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">${new Set(sedes.flatMap(sede => sede.especialidades)).size}</div>
-              <div class="stat-label">Especialidades</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">4</div>
-              <div class="stat-label">Comunidades Autónomas</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Lista de sedes -->
-        <section class="sedes-grid">
-          ${sedes.map(sede => `
-            <article class="sede-card">
-              <div class="sede-header">
-                <div class="sede-icon">${sede.imagen}</div>
-                <div class="sede-info">
-                  <h3 class="sede-name">${sede.nombre}</h3>
-                  <p class="sede-city">${sede.ciudad}</p>
-                </div>
-              </div>
-
-              <div class="sede-details">
-                <div class="sede-detail">
-                  <strong>📍 Dirección:</strong>
-                  <span>${sede.direccion}</span>
-                </div>
-                <div class="sede-detail">
-                  <strong>📞 Teléfono:</strong>
-                  <a href="tel:${sede.telefono}" class="sede-link">${sede.telefono}</a>
-                </div>
-                <div class="sede-detail">
-                  <strong>📧 Email:</strong>
-                  <a href="mailto:${sede.email}" class="sede-link">${sede.email}</a>
-                </div>
-                <div class="sede-detail">
-                  <strong>👥 Estudiantes:</strong>
-                  <span>${sede.estudiantes.toLocaleString()}</span>
-                </div>
-                <div class="sede-detail">
-                  <strong>📚 Especialidades:</strong>
-                  <span>${sede.especialidades.join(", ")}</span>
-                </div>
-                <div class="sede-detail">
-                  <strong>🗺️ Coordenadas:</strong>
-                  <span>${sede.coordenadas}</span>
-                </div>
-              </div>
-
-              <div class="sede-description">
-                <p>${sede.descripcion}</p>
-              </div>
-
-              <div class="sede-actions">
-                <button class="sede-btn" onclick="alert('Funcionalidad próximamente: Ver mapa de ${sede.ciudad}')">
-                  🗺️ Ver en Mapa
-                </button>
-                <button class="sede-btn" onclick="alert('Funcionalidad próximamente: Contactar con ${sede.nombre}')">
-                  📞 Contactar
-                </button>
-                <button class="sede-btn" onclick="alert('Funcionalidad próximamente: Ver galería de ${sede.ciudad}')">
-                  📸 Galería
-                </button>
-              </div>
-            </article>
-          `).join('')}
-        </section>
-
-        <!-- Información adicional -->
-        <section class="info-section">
-          <div class="info-card">
-            <h3>🌍 Equipo Distribuido</h3>
-            <p>Proyecto colaborativo de estudiantes ASIX 1º de Desarrollo Web distribuidos en diferentes comunidades autónomas:</p>
-            <ul>
-              <li><strong>Alcoy:</strong> Equipo base del proyecto (5 estudiantes)</li>
-              <li><strong>Barcelona:</strong> Desarrollo frontend avanzado (6 estudiantes)</li>
-              <li><strong>Vigo:</strong> Especialización en backend (5 estudiantes)</li>
-              <li><strong>Madrid:</strong> Coordinación e innovación (4 estudiantes)</li>
-            </ul>
+            <span class="absolute top-3 right-3 chip-soft bg-white/90 text-slate-800 backdrop-blur">
+              ${icon('users')} ${s.estudiantes}
+            </span>
           </div>
 
-          <div class="info-card">
-            <h3>🎓 Proyecto ASIX 1º</h3>
-            <p>Desarrollo de una intranet corporativa como proyecto final del ciclo formativo ASIX 1º:</p>
-            <div class="specialties-list">
-              <span class="specialty-tag">TypeScript</span>
-              <span class="specialty-tag">Vite</span>
-              <span class="specialty-tag">SPA Router</span>
-              <span class="specialty-tag">CSS Grid/Flexbox</span>
-              <span class="specialty-tag">API Integration</span>
-              <span class="specialty-tag">Responsive Design</span>
+          <div class="p-5 space-y-4">
+            <p class="text-sm text-slate-600 leading-relaxed">${s.descripcion}</p>
+
+            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
+              <div class="flex items-start gap-2 text-slate-600">
+                <span class="text-slate-400 mt-0.5">${icon('map-pin')}</span>
+                <span class="flex-1">${s.direccion}</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-600">
+                <span class="text-slate-400 mt-0.5">${icon('phone')}</span>
+                <a href="tel:${s.telefono}" class="hover:text-brand-700">${s.telefono}</a>
+              </div>
+              <div class="flex items-start gap-2 text-slate-600">
+                <span class="text-slate-400 mt-0.5">${icon('mail')}</span>
+                <a href="mailto:${s.email}" class="hover:text-brand-700 truncate">${s.email}</a>
+              </div>
+              <div class="flex items-start gap-2 text-slate-600">
+                <span class="text-slate-400 mt-0.5">${icon('compass')}</span>
+                <span>${s.coordenadas}</span>
+              </div>
+            </dl>
+
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">Especialidades</p>
+              <div class="flex flex-wrap gap-1.5">
+                ${s.especialidades.map((e) => `<span class="chip-soft">${e}</span>`).join('')}
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 pt-1">
+              <button class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-full bg-brand-600 text-white hover:bg-brand-700 text-sm font-semibold">
+                ${icon('map')} Ver mapa
+              </button>
+              <button class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm font-semibold">
+                ${icon('phone')} Contactar
+              </button>
+              <button class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm font-semibold">
+                ${icon('image')} Galería
+              </button>
             </div>
           </div>
-        </section>
+        </article>`
+        )
+        .join('')}
+    </section>
 
-        <!-- Mapa conceptual -->
-        <section class="map-section">
-          <h2>📍 Ubicación de Sedes</h2>
-          <div class="map-placeholder">
-            <div class="map-point" style="top: 70%; left: 20%;">🏫 Alcoy</div>
-            <div class="map-point" style="top: 30%; left: 15%;">🏙️ Barcelona</div>
-            <div class="map-point" style="top: 20%; left: 5%;">⚓ Vigo</div>
-            <div class="map-point" style="top: 50%; left: 25%;">🏛️ Madrid</div>
-          </div>
-        </section>
-      </main>
-    </div>
+    <!-- Info + tech tags -->
+    <section class="grid lg:grid-cols-2 gap-5 mb-10">
+      <article class="bg-white rounded-2xl border border-slate-200 elevation-1 p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="grid place-items-center w-10 h-10 rounded-xl bg-brand-50 text-brand-700 icon-lg">${icon('globe-2')}</span>
+          <h3 class="text-base font-semibold text-slate-900">Equipo distribuido</h3>
+        </div>
+        <p class="text-sm text-slate-600 mb-3">Estudiantes ASIX 1º repartidos por la geografía española:</p>
+        <ul class="space-y-2 text-sm text-slate-700">
+          ${sedes
+            .map(
+              (s) => `
+            <li class="flex items-center justify-between py-1.5 border-b border-slate-100 last:border-0">
+              <span class="flex items-center gap-2"><span class="text-brand-600">${icon('map-pin')}</span> <b>${s.ciudad}</b></span>
+              <span class="text-slate-500">${s.estudiantes} estudiantes</span>
+            </li>`
+            )
+            .join('')}
+        </ul>
+      </article>
 
-    <style>
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
-        margin-bottom: 20px;
-      }
+      <article class="bg-white rounded-2xl border border-slate-200 elevation-1 p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="grid place-items-center w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 icon-lg">${icon('graduation-cap')}</span>
+          <h3 class="text-base font-semibold text-slate-900">Stack del proyecto</h3>
+        </div>
+        <p class="text-sm text-slate-600 mb-4">
+          Intranet corporativa desarrollada como proyecto final del ciclo formativo:
+        </p>
+        <div class="flex flex-wrap gap-2">
+          ${['TypeScript', 'Vite', 'Tailwind CSS', 'Beer CSS', 'Lucide Icons', 'SPA Router', 'Responsive Design']
+            .map((t) => `<span class="chip-soft">${t}</span>`)
+            .join('')}
+        </div>
+      </article>
+    </section>
 
-      .stat-card {
-        background: var(--code-bg);
-        padding: 20px;
-        border-radius: 8px;
-        text-align: center;
-        border: 1px solid var(--border);
-      }
-
-      .stat-number {
-        font-size: 32px;
-        font-weight: 700;
-        color: var(--accent);
-        margin-bottom: 5px;
-      }
-
-      .stat-label {
-        color: var(--text);
-        font-size: 14px;
-        font-weight: 600;
-      }
-
-      .sedes-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: 30px;
-        margin-bottom: 40px;
-      }
-
-      .sede-card {
-        background: var(--code-bg);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 25px;
-        transition: transform 0.2s, box-shadow 0.2s;
-      }
-
-      .sede-card:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow);
-      }
-
-      .sede-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-
-      .sede-icon {
-        font-size: 48px;
-        margin-right: 20px;
-      }
-
-      .sede-info h3 {
-        margin: 0 0 5px 0;
-        color: var(--text-h);
-        font-size: 20px;
-      }
-
-      .sede-city {
-        margin: 0;
-        color: var(--accent);
-        font-weight: 600;
-        font-size: 16px;
-      }
-
-      .sede-details {
-        margin-bottom: 20px;
-      }
-
-      .sede-detail {
-        margin-bottom: 10px;
-        font-size: 14px;
-        line-height: 1.4;
-      }
-
-      .sede-detail strong {
-        color: var(--text-h);
-        margin-right: 8px;
-        display: inline-block;
-        min-width: 120px;
-      }
-
-      .sede-link {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      .sede-link:hover {
-        text-decoration: underline;
-      }
-
-      .sede-description {
-        background: rgba(170, 59, 255, 0.05);
-        padding: 15px;
-        border-radius: 6px;
-        margin-bottom: 20px;
-        border-left: 3px solid var(--accent);
-      }
-
-      .sede-description p {
-        margin: 0;
-        color: var(--text);
-        font-size: 14px;
-        line-height: 1.5;
-      }
-
-      .sede-actions {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-
-      .sede-btn {
-        padding: 10px 16px;
-        border: 1px solid var(--accent);
-        background: var(--accent);
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
-        transition: background-color 0.2s;
-        flex: 1;
-        min-width: 120px;
-      }
-
-      .sede-btn:hover {
-        background: var(--accent-border);
-      }
-
-      .info-section {
-        margin-top: 40px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: 20px;
-        margin-bottom: 40px;
-      }
-
-      .info-card {
-        background: var(--code-bg);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 25px;
-      }
-
-      .info-card h3 {
-        margin: 0 0 15px 0;
-        color: var(--text-h);
-        font-size: 18px;
-      }
-
-      .info-card p {
-        margin: 0 0 15px 0;
-        color: var(--text);
-        line-height: 1.6;
-      }
-
-      .info-card ul {
-        margin: 0;
-        padding-left: 20px;
-      }
-
-      .info-card li {
-        margin-bottom: 8px;
-        color: var(--text);
-      }
-
-      .specialties-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .specialty-tag {
-        background: var(--accent-bg);
-        color: var(--accent);
-        padding: 4px 10px;
-        border-radius: 12px;
-        font-size: 12px;
-        font-weight: 600;
-      }
-
-      .map-section {
-        background: var(--code-bg);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 30px;
-        text-align: center;
-        margin-bottom: 40px;
-      }
-
-      .map-section h2 {
-        margin: 0 0 20px 0;
-        color: var(--text-h);
-      }
-
-      .map-placeholder {
-        background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
-        border: 2px dashed var(--border);
-        border-radius: 8px;
-        height: 300px;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text);
-        font-size: 16px;
-      }
-
-      .map-point {
-        position: absolute;
-        background: var(--accent);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-        box-shadow: var(--shadow);
-      }
-
-      @media (max-width: 768px) {
-        .sedes-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .info-section {
-          grid-template-columns: 1fr;
-        }
-
-        .sede-actions {
-          flex-direction: column;
-        }
-
-        .sede-btn {
-          width: 100%;
-        }
-
-        .stats-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-    </style>
+    <!-- Map -->
+    <section class="bg-white rounded-2xl border border-slate-200 elevation-1 p-6 mb-4">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <span class="grid place-items-center w-10 h-10 rounded-xl bg-sky-50 text-sky-700 icon-lg">${icon('map')}</span>
+          <h2 class="text-base font-semibold text-slate-900">Ubicación de sedes</h2>
+        </div>
+        <span class="text-xs text-slate-500">Visualización esquemática</span>
+      </div>
+      <div class="relative h-72 rounded-xl overflow-hidden border border-slate-200 bg-gradient-to-br from-sky-50 via-brand-50 to-emerald-50">
+        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80" alt="Mapa" class="absolute inset-0 w-full h-full object-cover opacity-40" />
+        ${[
+          { top: '62%', left: '55%', label: 'Alcoy' },
+          { top: '32%', left: '62%', label: 'Barcelona' },
+          { top: '22%', left: '18%', label: 'Vigo' },
+          { top: '48%', left: '42%', label: 'Madrid' },
+        ]
+          .map(
+            (p) => `
+          <div class="absolute" style="top:${p.top}; left:${p.left}">
+            <div class="relative">
+              <span class="absolute inset-0 rounded-full bg-brand-500 animate-ping opacity-75 w-3 h-3"></span>
+              <span class="relative block w-3 h-3 rounded-full bg-brand-600 ring-2 ring-white"></span>
+            </div>
+            <span class="absolute top-4 -translate-x-1/2 left-1.5 px-2 py-0.5 rounded-full bg-white text-xs font-semibold text-slate-800 shadow whitespace-nowrap">
+              ${p.label}
+            </span>
+          </div>`
+          )
+          .join('')}
+      </div>
+    </section>
   `
+
+  return layout(content)
 }
