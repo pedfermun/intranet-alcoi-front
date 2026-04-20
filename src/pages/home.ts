@@ -110,7 +110,7 @@ export function homePage(): string {
           ${[
             { ic: 'server', tone: 'bg-emerald-50 text-emerald-700', text: '<b>SRV-WEB-ALC01</b> completó su backup diario correctamente.', time: 'Hace 5 min' },
             { ic: 'triangle-alert', tone: 'bg-red-50 text-red-700', text: '<b>SRV-MAIL-ALC02</b> alcanzó el 95% de uso de disco.', time: 'Hace 27 min' },
-            { ic: 'user-plus', tone: 'bg-brand-50 text-brand-700', text: '<b>Pablo Fernández</b> actualizó su perfil en el directorio.', time: 'Hace 2 h' },
+            { ic: 'user-plus', tone: 'bg-brand-50 text-brand-700', text: '<b>Pedro Fernández</b> actualizó su perfil en el directorio.', time: 'Hace 2 h' },
             { ic: 'calendar-check', tone: 'bg-sky-50 text-sky-700', text: 'Reunión de seguimiento ASIX 1º agendada para el viernes.', time: 'Ayer' },
           ]
             .map(

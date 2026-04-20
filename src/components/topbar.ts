@@ -45,13 +45,14 @@ export function topbar(currentPath: string): string {
             ${links}
           </nav>
 
-          <div class="flex items-center gap-2">
+          <div class="flex items-end gap-2">
             <div class="hidden sm:flex items-center gap-2 ml-1 pl-3">
-              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=96&h=96&q=80" alt="Avatar" class="w-8 h-8 rounded-full object-cover" />
               <div class="leading-tight">
                 <p class="text-xs font-semibold text-slate-900">P. Fernández</p>
                 <p class="text-[11px] text-slate-500">ASIX 1º</p>
               </div>
+
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=96&h=96&q=80" alt="Avatar" class="w-8 h-8 rounded-full object-cover" />
             </div>
             <button id="mobileMenuBtn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full text-slate-700 hover:bg-slate-100" aria-label="Abrir menú">
               ${icon('menu')}

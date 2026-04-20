@@ -40,7 +40,7 @@ export const contactos: Contact[] = [
     avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=200&h=200&q=80',
   },
   {
-    id: 5, nombre: 'Pablo Fernández', cargo: 'Analista de Datos',
+    id: 5, nombre: 'Pedro Fernández', cargo: 'Analista de Datos',
     departamento: 'ASIX 1º - Desarrollo Web',
     email: 'pablo.fernandez@institut-alcoi.com', telefono: '+34 965 123 460',
     extension: '105', ubicacion: 'Aula de Informática - Planta 2',
