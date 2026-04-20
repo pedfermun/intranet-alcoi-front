@@ -1,8 +1,9 @@
 import { layout, pageHeader, statCard } from '../components/layout'
 import { icon } from '../components/icons'
-import { sedes } from '../lib/data'
+import { getSedes } from '../lib/data'
 
-export function sedesPage(): string {
+export async function sedesPage(): Promise<string> {
+  const sedes = await getSedes()
   const totalEstudiantes = sedes.reduce((sum, s) => sum + s.estudiantes, 0)
   const totalEspecialidades = new Set(sedes.flatMap((s) => s.especialidades)).size
 

@@ -4,10 +4,9 @@ type NavItem = { href: string; label: string; icon: string }
 
 const navItems: NavItem[] = [
   { href: '/',           label: 'Inicio',     icon: 'home' },
-  { href: '/servicios',  label: 'Servicios',  icon: 'layout-grid' },
   { href: '/sedes',      label: 'Sedes',      icon: 'map-pin' },
-  { href: '/contacto',   label: 'Directorio', icon: 'users' },
   { href: '/servidores', label: 'Servidores', icon: 'server' },
+  { href: '/tareas',     label: 'Tareas',     icon: 'kanban-square' },
   { href: '/chatbot',    label: 'Chatbot',    icon: 'bot' },
 ]
 

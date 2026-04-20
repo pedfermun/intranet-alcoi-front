@@ -1,6 +1,6 @@
 import { layout, pageHeader, statCard } from '../components/layout'
 import { icon } from '../components/icons'
-import { servidores, type Estado } from '../lib/data'
+import { getServidores, type Estado } from '../lib/data'
 
 const estadoStyle: Record<Estado, { label: string; dot: string; badge: string; icon: string }> = {
   correcto:      { label: 'Operativo',     dot: 'status-ok',    badge: 'bg-emerald-50 text-emerald-700', icon: 'check-circle-2' },
@@ -22,7 +22,8 @@ function formatFecha(f: string) {
   })
 }
 
-export function servidoresPage(): string {
+export async function servidoresPage(): Promise<string> {
+  const servidores = await getServidores()
   const operativos    = servidores.filter((s) => s.estado === 'correcto').length
   const avisos        = servidores.filter((s) => s.estado === 'aviso').length
   const criticos      = servidores.filter((s) => s.estado === 'critico').length
@@ -114,13 +115,6 @@ export function servidoresPage(): string {
               <div class="flex items-center gap-1.5"><span class="text-slate-400">${icon('timer')}</span> ${s.uptime}</div>
             </div>
 
-            <div class="px-5 mt-4">
-              <p class="text-[11px] uppercase tracking-widest text-slate-500 font-semibold mb-2">Servicios</p>
-              <div class="flex flex-wrap gap-1.5">
-                ${s.servicios.map((sv) => `<span class="chip-soft">${sv}</span>`).join('')}
-              </div>
-            </div>
-
             <div class="px-5 mt-4 grid grid-cols-3 gap-3">
               ${[
                 { label: 'CPU',  val: s.cpu,     ic: 'cpu' },
@@ -147,15 +141,9 @@ export function servidoresPage(): string {
                 ${icon('clock')} ${formatFecha(s.ultimaRevision)}
               </span>
               <div class="flex items-center gap-1">
-                <button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-semibold" aria-label="Detalles">
-                  ${icon('bar-chart-3')} Detalles
-                </button>
-                <button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-semibold" aria-label="Reiniciar">
-                  ${icon('rotate-ccw')}
-                </button>
-                <button class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-brand-600 text-white hover:bg-brand-700 text-xs font-semibold" aria-label="SSH">
+                <a href="ssh://batoi@${s.ip}" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-brand-600 text-white hover:bg-brand-700 text-xs font-semibold" aria-label="SSH a ${s.ip}">
                   ${icon('terminal')} SSH
-                </button>
+                </a>
               </div>
             </footer>
           </article>`
@@ -172,9 +160,6 @@ export function servidoresPage(): string {
         </div>
         <ul class="space-y-2 text-sm text-slate-600">
           <li class="flex gap-2"><span class="text-brand-600 mt-0.5">${icon('refresh-cw')}</span> Los datos se refrescan cada 5 minutos desde la base central.</li>
-          <li class="flex gap-2"><span class="text-brand-600 mt-0.5">${icon('bell')}</span> Notificaciones automáticas por email y Telegram ante incidencias críticas.</li>
-          <li class="flex gap-2"><span class="text-brand-600 mt-0.5">${icon('history')}</span> 30 días de histórico almacenado para análisis de tendencias.</li>
-          <li class="flex gap-2"><span class="text-brand-600 mt-0.5">${icon('plug')}</span> API REST disponible en <code class="px-1.5 py-0.5 rounded bg-slate-100 text-[12px]">/api/servidores/status</code>.</li>
         </ul>
       </article>
 

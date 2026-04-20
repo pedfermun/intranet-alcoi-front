@@ -1,37 +1,62 @@
-import { contactoPage, wireContactoPage } from './pages/contacto'
 import { homePage } from './pages/home'
 import { notFoundPage } from './pages/not-found'
 import { sedesPage } from './pages/sedes'
-import { serviciosPage } from './pages/servicios'
 import { servidoresPage, wireServidoresPage } from './pages/servidores'
 import { chatbotPage, wireChatbotPage } from './pages/chatbot'
+import { tasksPage, wireTasksPage } from './pages/tasks'
+import { loginPage, wireLoginPage } from './pages/login'
 import { hydrateIcons } from './components/icons'
 import { wireTopbar } from './components/topbar'
+import { getSession } from './lib/auth'
 
 type Route = {
-  render: () => string
-  wire?: () => void
+  render: () => string | Promise<string>
+  wire?: () => void | Promise<void>
+  public?: boolean
 }
 
 const routes: Record<string, Route> = {
   '/':           { render: homePage },
-  '/servicios':  { render: serviciosPage },
   '/sedes':      { render: sedesPage },
-  '/contacto':   { render: contactoPage,   wire: wireContactoPage },
   '/servidores': { render: servidoresPage, wire: wireServidoresPage },
   '/chatbot':    { render: chatbotPage,    wire: wireChatbotPage },
+  '/tareas':     { render: tasksPage,      wire: wireTasksPage },
+  '/login':      { render: loginPage,      wire: wireLoginPage, public: true },
 }
 
-function renderRoute() {
+async function renderRoute() {
   const app = document.querySelector<HTMLDivElement>('#app')
   if (!app) return
 
-  const route = routes[window.location.pathname] ?? { render: notFoundPage }
-  app.innerHTML = route.render()
+  const path = window.location.pathname
+  const route = routes[path] ?? { render: notFoundPage }
+
+  const session = await getSession()
+
+  if (!session && !route.public) {
+    window.history.replaceState({}, '', '/login')
+    void renderRoute()
+    return
+  }
+
+  if (session && path === '/login') {
+    window.history.replaceState({}, '', '/')
+    void renderRoute()
+    return
+  }
+
+  app.innerHTML = `<div class="p-10 text-center text-slate-500 text-sm">Cargando…</div>`
+  try {
+    app.innerHTML = await route.render()
+  } catch (err) {
+    console.error('render route error', err)
+    app.innerHTML = `<div class="p-10 text-center text-red-600 text-sm">Error al cargar la vista.</div>`
+    return
+  }
 
   hydrateIcons(app)
-  wireTopbar()
-  route.wire?.()
+  if (!route.public) wireTopbar()
+  await route.wire?.()
   window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
 }
 
@@ -46,16 +71,16 @@ function onLinkClick(event: MouseEvent) {
   event.preventDefault()
   if (window.location.pathname === href) return
   window.history.pushState({}, '', href)
-  renderRoute()
+  void renderRoute()
 }
 
 export function navigateTo(path: string) {
   window.history.pushState({}, '', path)
-  renderRoute()
+  void renderRoute()
 }
 
 export function initRouter() {
   document.addEventListener('click', onLinkClick)
-  window.addEventListener('popstate', renderRoute)
-  renderRoute()
+  window.addEventListener('popstate', () => void renderRoute())
+  void renderRoute()
 }

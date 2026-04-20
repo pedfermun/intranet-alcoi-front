@@ -1,12 +1,13 @@
 import { layout, statCard } from '../components/layout'
 import { icon } from '../components/icons'
-import { servicios, servidores, sedes, contactos } from '../lib/data'
+import { getServidores, getSedes, getContactos } from '../lib/data'
 
-export function homePage(): string {
+export async function homePage(): Promise<string> {
+  const [servidores, sedes, contactos] = await Promise.all([
+     getServidores(), getSedes(), getContactos(),
+  ])
   const operativos = servidores.filter((s) => s.estado === 'correcto').length
   const avisos = servidores.filter((s) => s.estado === 'aviso' || s.estado === 'critico').length
-
-  const quickLinks = servicios.slice(0, 4)
 
   const content = `
     <!-- Hero -->
@@ -21,13 +22,10 @@ export function homePage(): string {
             Bienvenido a la Intranet del <span class="text-brand-100">Institut d'Alcoi</span>
           </h1>
           <p class="mt-5 max-w-xl text-brand-50/90 text-lg leading-relaxed">
-            Accede a los servicios internos, consulta el estado de la infraestructura y encuentra a tus compañeros del equipo ASIX 1º.
+            Accede a los servicios internos y consulta el estado de la infraestructura.
           </p>
           <div class="mt-7 flex flex-wrap items-center gap-3">
-            <a href="/servicios" data-link class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-brand-700 font-semibold hover:bg-brand-50 transition-colors elevation-1">
-              ${icon('layout-grid')} Ver servicios
-            </a>
-            <a href="/servidores" data-link class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 backdrop-blur text-white font-semibold hover:bg-white/20 transition-colors border border-white/25">
+            <a href="/servidores" data-link class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-brand-700 font-semibold hover:bg-brand-50 transition-colors elevation-1">
               ${icon('activity')} Estado de sistemas
             </a>
           </div>
@@ -63,7 +61,6 @@ export function homePage(): string {
 
     <!-- Stats -->
     <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-      ${statCard({ label: 'Servicios activos',  value: servicios.length,  icon: 'layout-grid', tone: 'brand' })}
       ${statCard({ label: 'Operativos',         value: operativos,        icon: 'shield-check', tone: 'success', hint: 'En los últimos 15 min' })}
       ${statCard({ label: 'Con incidencia',     value: avisos,            icon: 'triangle-alert', tone: 'warning' })}
       ${statCard({ label: 'Sedes conectadas',   value: sedes.length,      icon: 'map-pin', tone: 'info' })}
@@ -80,20 +77,6 @@ export function homePage(): string {
           Ver todos ${icon('arrow-right')}
         </a>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        ${quickLinks
-          .map(
-            (s) => `
-          <a href="${s.url}" ${s.url.startsWith('/') ? 'data-link' : ''} class="group bg-white rounded-2xl border border-slate-200 p-5 hover:border-brand-400 hover:-translate-y-0.5 transition-all elevation-1 hover:elevation-2">
-            <div class="grid place-items-center w-11 h-11 rounded-xl bg-brand-50 text-brand-700 icon-lg">
-              ${icon(s.icono)}
-            </div>
-            <h3 class="mt-4 font-semibold text-slate-900 group-hover:text-brand-700 transition-colors">${s.nombre}</h3>
-            <p class="mt-1 text-sm text-slate-500 line-clamp-2">${s.descripcion}</p>
-          </a>`
-          )
-          .join('')}
-      </div>
     </section>
 
     <!-- Two-column: Activity + Team -->
@@ -104,7 +87,6 @@ export function homePage(): string {
             <h2 class="text-lg font-semibold text-slate-900">Actividad reciente</h2>
             <p class="text-sm text-slate-500">Últimas acciones en la plataforma.</p>
           </div>
-          <button class="inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-brand-700">${icon('refresh-cw')} Actualizar</button>
         </div>
         <ul class="divide-y divide-slate-100">
           ${[
@@ -128,10 +110,6 @@ export function homePage(): string {
       </article>
 
       <article class="bg-white rounded-2xl border border-slate-200 elevation-1 p-6">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold text-slate-900">Tu equipo</h2>
-          <a href="/contacto" data-link class="text-sm font-semibold text-brand-700 hover:text-brand-800">Directorio</a>
-        </div>
         <ul class="space-y-3">
           ${contactos
             .slice(0, 4)

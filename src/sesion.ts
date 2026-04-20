@@ -24,9 +24,7 @@ export function loadDashboard(username: string) {
       <!-- Navigation -->
       <nav class="nav">
         <a href="/" data-link>Inicio</a>
-        <a href="/servicios" data-link>Servicios</a>
         <a href="/sedes" data-link>Sedes</a>
-        <a href="/contacto" data-link>Directorio</a>
         <a href="/servidores" data-link>Servidores</a>
       </nav>
 
@@ -56,12 +54,6 @@ export function loadDashboard(username: string) {
               <div style="font-size: 28px; margin-bottom: 10px;">📋</div>
               <h3 style="margin: 0 0 5px 0; color: var(--text-h); font-size: 16px;">Documentos</h3>
               <p style="margin: 0; color: var(--text); font-size: 14px;">Repositorio de archivos compartidos</p>
-            </div>
-
-            <div style="background: var(--code-bg); padding: 20px; border-radius: 8px; cursor: pointer; transition: transform 0.2s; border: 1px solid var(--border);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div style="font-size: 28px; margin-bottom: 10px;">👥</div>
-              <h3 style="margin: 0 0 5px 0; color: var(--text-h); font-size: 16px;">Directorio</h3>
-              <p style="margin: 0; color: var(--text); font-size: 14px;">Contactos de tu organización</p>
             </div>
 
             <div style="background: var(--code-bg); padding: 20px; border-radius: 8px; cursor: pointer; transition: transform 0.2s; border: 1px solid var(--border);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
