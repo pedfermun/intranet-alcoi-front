@@ -1,11 +1,25 @@
+import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
 import { layout, pageHeader, statCard } from '../components/layout'
 import { icon } from '../components/icons'
 import { getSedes } from '../lib/data'
+
+function parseCoords(s: string): [number, number] | null {
+  const m = s.match(/^([\d.]+)°([NS]),\s*([\d.]+)°([EW])$/)
+  if (!m) return null
+  const lat = parseFloat(m[1]) * (m[2] === 'S' ? -1 : 1)
+  const lng = parseFloat(m[3]) * (m[4] === 'W' ? -1 : 1)
+  return [lat, lng]
+}
 
 export async function sedesPage(): Promise<string> {
   const sedes = await getSedes()
   const totalEstudiantes = sedes.reduce((sum, s) => sum + s.estudiantes, 0)
   const totalEspecialidades = new Set(sedes.flatMap((s) => s.especialidades)).size
+
+  const mapData = JSON.stringify(
+    sedes.map((s) => ({ nombre: s.nombre, ciudad: s.ciudad, coordenadas: s.coordenadas }))
+  ).replace(/"/g, '&quot;')
 
   const content = `
     ${pageHeader({
@@ -126,37 +140,48 @@ export async function sedesPage(): Promise<string> {
 
     <!-- Map -->
     <section class="bg-white rounded-2xl border border-slate-200 elevation-1 p-6 mb-4">
-      <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center gap-3">
-          <span class="grid place-items-center w-10 h-10 rounded-xl bg-sky-50 text-sky-700 icon-lg">${icon('map')}</span>
-          <h2 class="text-base font-semibold text-slate-900">Ubicación de sedes</h2>
-        </div>
-        <span class="text-xs text-slate-500">Visualización esquemática</span>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="grid place-items-center w-10 h-10 rounded-xl bg-sky-50 text-sky-700 icon-lg">${icon('map')}</span>
+        <h2 class="text-base font-semibold text-slate-900">Ubicación de sedes</h2>
       </div>
-      <div class="relative h-72 rounded-xl overflow-hidden border border-slate-200 bg-gradient-to-br from-sky-50 via-brand-50 to-emerald-50">
-        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80" alt="Mapa" class="absolute inset-0 w-full h-full object-cover opacity-40" />
-        ${[
-          { top: '62%', left: '55%', label: 'Alcoy' },
-          { top: '32%', left: '62%', label: 'Barcelona' },
-          { top: '22%', left: '18%', label: 'Vigo' },
-          { top: '48%', left: '42%', label: 'Madrid' },
-        ]
-          .map(
-            (p) => `
-          <div class="absolute" style="top:${p.top}; left:${p.left}">
-            <div class="relative">
-              <span class="absolute inset-0 rounded-full bg-brand-500 animate-ping opacity-75 w-3 h-3"></span>
-              <span class="relative block w-3 h-3 rounded-full bg-brand-600 ring-2 ring-white"></span>
-            </div>
-            <span class="absolute top-4 -translate-x-1/2 left-1.5 px-2 py-0.5 rounded-full bg-white text-xs font-semibold text-slate-800 shadow whitespace-nowrap">
-              ${p.label}
-            </span>
-          </div>`
-          )
-          .join('')}
-      </div>
+      <div
+        id="sedes-map"
+        class="h-72 rounded-xl overflow-hidden border border-slate-200"
+        data-sedes="${mapData}"
+      ></div>
     </section>
   `
 
   return layout(content)
+}
+
+export function wireSedesPage(): void {
+  const mapEl = document.getElementById('sedes-map')
+  if (!mapEl) return
+
+  type SedePin = { nombre: string; ciudad: string; coordenadas: string }
+  const sedes = JSON.parse(mapEl.getAttribute('data-sedes') ?? '[]') as SedePin[]
+
+  const map = L.map(mapEl).setView([40.2, -3.5], 6)
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18,
+  }).addTo(map)
+
+  const pinIcon = L.divIcon({
+    className: '',
+    html: `<div style="width:14px;height:14px;background:#2563eb;border-radius:50%;border:2.5px solid white;box-shadow:0 2px 6px rgba(37,99,235,0.5)"></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7],
+    popupAnchor: [0, -10],
+  })
+
+  for (const s of sedes) {
+    const coords = parseCoords(s.coordenadas)
+    if (!coords) continue
+    L.marker(coords, { icon: pinIcon })
+      .addTo(map)
+      .bindPopup(`<b style="color:#1e3a5f">${s.nombre}</b><br><span style="color:#64748b;font-size:12px">${s.ciudad}</span>`)
+  }
 }

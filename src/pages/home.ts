@@ -66,19 +66,6 @@ export async function homePage(): Promise<string> {
       ${statCard({ label: 'Sedes conectadas',   value: sedes.length,      icon: 'map-pin', tone: 'info' })}
     </section>
 
-    <!-- Quick access -->
-    <section class="mb-10">
-      <div class="flex items-end justify-between mb-4">
-        <div>
-          <h2 class="text-xl font-semibold text-slate-900">Accesos rápidos</h2>
-          <p class="text-sm text-slate-500">Los servicios que más usa tu equipo.</p>
-        </div>
-        <a href="/servicios" data-link class="text-sm font-semibold text-brand-700 hover:text-brand-800 inline-flex items-center gap-1">
-          Ver todos ${icon('arrow-right')}
-        </a>
-      </div>
-    </section>
-
     <!-- Two-column: Activity + Team -->
     <section class="grid lg:grid-cols-3 gap-6">
       <article class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 elevation-1 p-6">
@@ -103,25 +90,6 @@ export async function homePage(): Promise<string> {
                 <p class="text-sm text-slate-700">${a.text}</p>
                 <p class="text-xs text-slate-400 mt-0.5">${a.time}</p>
               </div>
-            </li>`
-            )
-            .join('')}
-        </ul>
-      </article>
-
-      <article class="bg-white rounded-2xl border border-slate-200 elevation-1 p-6">
-        <ul class="space-y-3">
-          ${contactos
-            .slice(0, 4)
-            .map(
-              (c) => `
-            <li class="flex items-center gap-3">
-              <img src="${c.avatar}" alt="${c.nombre}" class="w-10 h-10 rounded-full object-cover ring-2 ring-white elevation-1" />
-              <div class="min-w-0 flex-1">
-                <p class="text-sm font-semibold text-slate-900 truncate">${c.nombre}</p>
-                <p class="text-xs text-slate-500 truncate">${c.cargo}</p>
-              </div>
-              <a href="mailto:${c.email}" class="text-slate-400 hover:text-brand-700 icon-sm" aria-label="Enviar email">${icon('mail')}</a>
             </li>`
             )
             .join('')}

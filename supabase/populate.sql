@@ -3,9 +3,9 @@
 -- =============================================================
 -- Ejecutar DESPUÉS de `seed.sql`.
 -- Incluye:
---   * 3 usuarios en auth.users con metadatos (name/role/avatar/tone)
+--   * 5 usuarios en auth.users con metadatos (name/role/avatar/tone)
 --     que la VIEW public.users exponará al frontend.
---     Contraseña de todos: "password123"
+--     Contraseña de todos: "1234batoi"
 --   * Contactos, sedes, servidores, servicios y tasks de ejemplo.
 -- =============================================================
 
@@ -14,7 +14,9 @@ TRUNCATE public.tasks, public.servidores, public.sedes, public.contactos, public
 DELETE FROM auth.users WHERE id IN (
   '11111111-1111-1111-1111-111111111111',
   '22222222-2222-2222-2222-222222222222',
-  '33333333-3333-3333-3333-333333333333'
+  '33333333-3333-3333-3333-333333333333',
+  '44444444-4444-4444-4444-444444444444',
+  '55555555-5555-5555-5555-555555555555'
 );
 
 -- =============================================================
@@ -31,13 +33,13 @@ INSERT INTO auth.users (
     '11111111-1111-1111-1111-111111111111',
     'authenticated', 'authenticated',
     'pedro@institut-alcoi.com',
-    crypt('password123', gen_salt('bf')),
+    crypt('1234batoi', gen_salt('bf')),
     now(), now(), now(),
     '{"provider":"email","providers":["email"]}',
     jsonb_build_object(
         'name',   'Pedro Fernández',
-        'role',   'Alumno ASIX 1º',
-        'avatar', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=96&h=96&q=80',
+        'role',   'Técnico',
+        'avatar', '/pedro.jpeg',
         'tone',   'brand'
     ),
     false, '', '', '', ''
@@ -47,13 +49,13 @@ INSERT INTO auth.users (
     '22222222-2222-2222-2222-222222222222',
     'authenticated', 'authenticated',
     'diego@institut-alcoi.com',
-    crypt('password123', gen_salt('bf')),
+    crypt('1234batoi', gen_salt('bf')),
     now(), now(), now(),
     '{"provider":"email","providers":["email"]}',
     jsonb_build_object(
         'name',   'Diego Perez',
         'role',   'Administrador de Sistemas',
-        'avatar', 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=96&h=96&q=80',
+        'avatar', '/diego.jpeg',
         'tone',   'warning'
     ),
     false, '', '', '', ''
@@ -63,13 +65,45 @@ INSERT INTO auth.users (
     '33333333-3333-3333-3333-333333333333',
     'authenticated', 'authenticated',
     'aitor@institut-alcoi.com',
-    crypt('password123', gen_salt('bf')),
+    crypt('1234batoi', gen_salt('bf')),
     now(), now(), now(),
     '{"provider":"email","providers":["email"]}',
     jsonb_build_object(
         'name',   'Aitor Brotons',
         'role',   'Desarrollador Frontend',
-        'avatar', 'https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?auto=format&fit=crop&w=96&h=96&q=80',
+        'avatar', '/aitor.jpeg',
+        'tone',   'success'
+    ),
+    false, '', '', '', ''
+),
+(
+    '00000000-0000-0000-0000-000000000000',
+    '44444444-4444-4444-4444-444444444444',
+    'authenticated', 'authenticated',
+    'victor@institut-alcoi.com',
+    crypt('1234batoi', gen_salt('bf')),
+    now(), now(), now(),
+    '{"provider":"email","providers":["email"]}',
+    jsonb_build_object(
+        'name',   'Victor Tamajon',
+        'role',   'Comercial',
+        'avatar', '/victor.jpeg',
+        'tone',   'success'
+    ),
+    false, '', '', '', ''
+),
+(
+    '00000000-0000-0000-0000-000000000000',
+    '55555555-5555-5555-5555-555555555555',
+    'authenticated', 'authenticated',
+    'pablo@institut-alcoi.com',
+    crypt('1234batoi', gen_salt('bf')),
+    now(), now(), now(),
+    '{"provider":"email","providers":["email"]}',
+    jsonb_build_object(
+        'name',   'Pablo Vaño',
+        'role',   'Director de Marketing',
+        'avatar', '/pablo.jpeg',
         'tone',   'success'
     ),
     false, '', '', '', ''
@@ -79,19 +113,19 @@ INSERT INTO auth.users (
 -- 2. CONTACTOS
 -- =============================================================
 INSERT INTO public.contactos (nombre, cargo, departamento, email, telefono, extension, ubicacion, avatar) VALUES
-('Aitor Brotons',   'Desarrollador Frontend',      'ASIX 1º - Desarrollo Web', 'aitor.brotons@institut-alcoi.com',  '+34 965 123 456', '101', 'Aula de Informática - Planta 2', 'https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?auto=format&fit=crop&w=200&h=200&q=80'),
-('Pablo Vañó',      'Desarrollador Backend',       'ASIX 1º - Desarrollo Web', 'pablo.vano@institut-alcoi.com',     '+34 965 123 457', '102', 'Aula de Informática - Planta 2', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&h=200&q=80'),
-('Victor Tamajón',  'Diseñador UX/UI',             'ASIX 1º - Desarrollo Web', 'victor.tamajon@institut-alcoi.com', '+34 965 123 458', '103', 'Aula de Informática - Planta 2', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80'),
-('Diego Pérez',     'Administrador de Sistemas',   'ASIX 1º - Desarrollo Web', 'diego.perez@institut-alcoi.com',    '+34 965 123 459', '104', 'Aula de Informática - Planta 2', 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=200&h=200&q=80'),
-('Pedro Fernández', 'Analista de Datos',           'ASIX 1º - Desarrollo Web', 'pablo.fernandez@institut-alcoi.com','+34 965 123 460', '105', 'Aula de Informática - Planta 2', 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=200&h=200&q=80');
+('Pedro Fernández', 'Técnico en higiene de urinarios', 'ASIX 1º - Desarrollo Web', 'pedro.fernandez@institut-alcoi.com', '+34 965 123 456', '101', 'Aula de Informática - Planta 2', '/pedro.png'),
+('Diego Pérez',     'Administrador de Sistemas',      'ASIX 1º - Desarrollo Web', 'diego.perez@institut-alcoi.com',     '+34 965 123 457', '102', 'Aula de Informática - Planta 2', '/diego.png'),
+('Aitor Brotons',   'Desarrollador Frontend',         'ASIX 1º - Desarrollo Web', 'aitor.brotons@institut-alcoi.com',   '+34 965 123 458', '103', 'Aula de Informática - Planta 2', '/aitor.png'),
+('Victor Tamajón',  'Comercial',                      'ASIX 1º - Desarrollo Web', 'victor.tamajon@institut-alcoi.com',  '+34 965 123 459', '104', 'Aula de Informática - Planta 2', '/victor.png'),
+('Pablo Vaño',      'Director de Marketing',          'ASIX 1º - Desarrollo Web', 'pablo.vano@institut-alcoi.com',      '+34 965 123 460', '105', 'Aula de Informática - Planta 2', '/pablo.png');
 
 -- =============================================================
 -- 3. SEDES
 -- =============================================================
 INSERT INTO public.sedes (nombre, ciudad, direccion, telefono, email, descripcion, estudiantes, especialidades, image, coordenadas) VALUES
-('Institut d''Alcoi',     'Alcoy',     'C/ Sant Nicolau, 1, 03801 Alcoy, Alicante',    '+34 965 123 456', 'info@institut-alcoi.com',      'Sede principal del proyecto. Centro educativo de referencia en la comarca de l''Alcoià.',   5, ARRAY['ASIX','DAM','DAW','SMX'],                                            'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80', '38.6983°N, 0.4739°W'),
+('Institut d''Alcoi',     'Alcoy',     'C/ Sant Nicolau, 1, 03801 Alcoy, Alicante',    '+34 965 123 456', 'info@institut-alcoi.com',      'Sede principal del proyecto. Centro educativo de referencia en la comarca de l''Alcoià.',   5, ARRAY['ASIX','DAM','DAW','SMX'],                                            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia-cdn.tripadvisor.com%2Fmedia%2Fphoto-c%2F1280x250%2F0d%2Fd9%2F90%2Ff1%2Falcoy.jpg&f=1&nofb=1&ipt=e16ee3ca01fdbd56cea79ec33d272d579abea70955b4ae2598a260697f642a7b', '38.6983°N, 0.4739°W'),
 ('Institut de Barcelona', 'Barcelona', 'Carrer de la Diputació, 100, 08015 Barcelona', '+34 934 567 890', 'barcelona@institut-alcoi.com', 'Sede en el corazón de Barcelona. Conexión directa con el tejido empresarial catalán.',      6, ARRAY['ASIX','DAM','DAW','SMX','Telecomunicaciones'],                      'https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=800&q=80', '41.3851°N, 2.1734°E'),
-('Institut de Vigo',      'Vigo',      'Rúa do Príncipe, 22, 36202 Vigo, Pontevedra',  '+34 986 123 789', 'vigo@institut-alcoi.com',      'Sede gallega especializada en tecnologías del mar y energías renovables.',                  5, ARRAY['ASIX','DAM','DAW','SMX','Electrónica'],                              'https://images.unsplash.com/photo-1527786356703-4b100091cd2c?auto=format&fit=crop&w=800&q=80', '42.2406°N, 8.7207°W'),
+('Institut de Vigo',      'Vigo',      'Rúa do Príncipe, 22, 36202 Vigo, Pontevedra',  '+34 986 123 789', 'vigo@institut-alcoi.com',      'Sede gallega especializada en tecnologías del mar y energías renovables.',                  5, ARRAY['ASIX','DAM','DAW','SMX','Electrónica'],                              'https://imgs.search.brave.com/3tS3QMrsB8d5SPlxfUzrGerRqfwV7SmX6fTpJjFk1VY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS92aWdvLWhvcml6/b250ZS1wdWVydG8t/YXRhcmRlY2VyLWdh/bGljaWEtZXNwYW5h/Xzc5Mjk1LTEwMDk3/LmpwZz9zZW10PWFp/c19oeWJyaWQmdz03/NDAmcT04MA', '42.2406°N, 8.7207°W'),
 ('Institut de Madrid',    'Madrid',    'Calle de la Princesa, 5, 28008 Madrid',        '+34 915 678 123', 'madrid@institut-alcoi.com',    'Sede central en Madrid. Centro de innovación tecnológica con conexiones internacionales.',  4, ARRAY['ASIX','DAM','DAW','SMX','Inteligencia Artificial','Ciberseguridad'], 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=800&q=80', '40.4168°N, 3.7038°W');
 
 -- =============================================================

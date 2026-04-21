@@ -1,13 +1,14 @@
 import { homePage } from './pages/home'
 import { notFoundPage } from './pages/not-found'
-import { sedesPage } from './pages/sedes'
+import { sedesPage, wireSedesPage } from './pages/sedes'
 import { servidoresPage, wireServidoresPage } from './pages/servidores'
 import { chatbotPage, wireChatbotPage } from './pages/chatbot'
 import { tasksPage, wireTasksPage } from './pages/tasks'
 import { loginPage, wireLoginPage } from './pages/login'
 import { hydrateIcons } from './components/icons'
-import { wireTopbar } from './components/topbar'
+import { wireTopbar, setTopbarUser } from './components/topbar'
 import { getSession } from './lib/auth'
+import { getCurrentUserId, getUser } from './lib/data'
 
 type Route = {
   render: () => string | Promise<string>
@@ -17,7 +18,7 @@ type Route = {
 
 const routes: Record<string, Route> = {
   '/':           { render: homePage },
-  '/sedes':      { render: sedesPage },
+  '/sedes':      { render: sedesPage, wire: wireSedesPage },
   '/servidores': { render: servidoresPage, wire: wireServidoresPage },
   '/chatbot':    { render: chatbotPage,    wire: wireChatbotPage },
   '/tareas':     { render: tasksPage,      wire: wireTasksPage },
@@ -34,6 +35,7 @@ async function renderRoute() {
   const session = await getSession()
 
   if (!session && !route.public) {
+    setTopbarUser(null)
     window.history.replaceState({}, '', '/login')
     void renderRoute()
     return
@@ -43,6 +45,12 @@ async function renderRoute() {
     window.history.replaceState({}, '', '/')
     void renderRoute()
     return
+  }
+
+  if (session) {
+    const userId = await getCurrentUserId()
+    const user = userId ? await getUser(userId) : null
+    setTopbarUser(user)
   }
 
   app.innerHTML = `<div class="p-10 text-center text-slate-500 text-sm">Cargando…</div>`
