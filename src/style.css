@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-brand-50:  #eff6ff;
   --color-brand-100: #dbeafe;
@@ -36,6 +38,28 @@ body.light {
   --warning: #d97706;
   --error: #dc2626;
   --info: #0284c7;
+}
+
+html.dark {
+  color-scheme: dark;
+  --primary: #3b82f6;
+  --on-primary: #ffffff;
+  --primary-container: #1e3a8a;
+  --on-primary-container: #bfdbfe;
+  --secondary: #94a3b8;
+  --on-secondary: #0f172a;
+  --surface: #1e293b;
+  --surface-variant: #334155;
+  --on-surface: #f1f5f9;
+  --on-surface-variant: #94a3b8;
+  --background: #0f172a;
+  --on-background: #f1f5f9;
+  --outline: #475569;
+  --outline-variant: #334155;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #f87171;
+  --info: #38bdf8;
 }
 
 html, body {
@@ -78,6 +102,11 @@ nav.top-app-bar {
 .elevation-1 { box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06); }
 .elevation-2 { box-shadow: 0 4px 6px -1px rgba(15,23,42,.06), 0 2px 4px -2px rgba(15,23,42,.04); }
 .elevation-3 { box-shadow: 0 10px 15px -3px rgba(15,23,42,.08), 0 4px 6px -4px rgba(15,23,42,.05); }
+
+html.dark .donut-track { stroke: #334155; }
+html.dark .elevation-1 { box-shadow: 0 1px 2px rgba(0,0,0,.25), 0 1px 3px rgba(0,0,0,.35); }
+html.dark .elevation-2 { box-shadow: 0 4px 6px -1px rgba(0,0,0,.35), 0 2px 4px -2px rgba(0,0,0,.25); }
+html.dark .elevation-3 { box-shadow: 0 10px 15px -3px rgba(0,0,0,.45), 0 4px 6px -4px rgba(0,0,0,.35); }
 
 .status-dot {
   width: .625rem;
@@ -153,6 +182,10 @@ nav.top-app-bar {
   padding: .1em .35em;
   font-size: .8125em;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+html.dark .chat-prose code:not(pre code) {
+  background: #334155;
+  color: #e2e8f0;
 }
 
 /* Code blocks (highlight.js wraps in <pre><code class="hljs …">) */

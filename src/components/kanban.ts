@@ -30,40 +30,40 @@ type ColumnDef = {
 const COLUMNS: ColumnDef[] = [
   {
     id: 'backlog', title: 'Backlog', icon: 'inbox',
-    colBg: 'bg-slate-50/70', colBorder: 'border-slate-200/80', topBar: 'bg-slate-400',
-    dot: 'bg-slate-400', heading: 'text-slate-700', chip: 'bg-white text-slate-600 border border-slate-200',
-    cardStripe: 'bg-slate-300', cardHoverBorder: 'hover:border-slate-300',
-    addHoverBg: 'hover:bg-slate-100', addHoverText: 'hover:text-slate-800',
+    colBg: 'bg-slate-50/70 dark:bg-slate-800/70', colBorder: 'border-slate-200/80 dark:border-slate-700/80', topBar: 'bg-slate-400 dark:bg-slate-500',
+    dot: 'bg-slate-400', heading: 'text-slate-700 dark:text-slate-300', chip: 'bg-white text-slate-600 border border-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600',
+    cardStripe: 'bg-slate-300 dark:bg-slate-500', cardHoverBorder: 'hover:border-slate-300 dark:hover:border-slate-500',
+    addHoverBg: 'hover:bg-slate-100 dark:hover:bg-slate-700', addHoverText: 'hover:text-slate-800 dark:hover:text-slate-200',
   },
   {
     id: 'todo', title: 'Pendiente', icon: 'circle-dashed',
-    colBg: 'bg-amber-50/70', colBorder: 'border-amber-200/70', topBar: 'bg-amber-400',
-    dot: 'bg-amber-500', heading: 'text-amber-700', chip: 'bg-white text-amber-700 border border-amber-200',
-    cardStripe: 'bg-amber-400', cardHoverBorder: 'hover:border-amber-300',
-    addHoverBg: 'hover:bg-amber-100/80', addHoverText: 'hover:text-amber-700',
+    colBg: 'bg-amber-50/70 dark:bg-amber-900/20', colBorder: 'border-amber-200/70 dark:border-amber-800/70', topBar: 'bg-amber-400 dark:bg-amber-600',
+    dot: 'bg-amber-500', heading: 'text-amber-700 dark:text-amber-400', chip: 'bg-white text-amber-700 border border-amber-200 dark:bg-slate-700 dark:text-amber-400 dark:border-slate-600',
+    cardStripe: 'bg-amber-400 dark:bg-amber-500', cardHoverBorder: 'hover:border-amber-300 dark:hover:border-amber-600',
+    addHoverBg: 'hover:bg-amber-100/80 dark:hover:bg-amber-900/30', addHoverText: 'hover:text-amber-700 dark:hover:text-amber-400',
   },
   {
     id: 'doing', title: 'En progreso', icon: 'loader-circle',
-    colBg: 'bg-sky-50/70', colBorder: 'border-sky-200/70', topBar: 'bg-sky-400',
-    dot: 'bg-sky-500', heading: 'text-sky-700', chip: 'bg-white text-sky-700 border border-sky-200',
-    cardStripe: 'bg-sky-400', cardHoverBorder: 'hover:border-sky-300',
-    addHoverBg: 'hover:bg-sky-100/80', addHoverText: 'hover:text-sky-700',
+    colBg: 'bg-sky-50/70 dark:bg-sky-900/20', colBorder: 'border-sky-200/70 dark:border-sky-800/70', topBar: 'bg-sky-400 dark:bg-sky-600',
+    dot: 'bg-sky-500', heading: 'text-sky-700 dark:text-sky-400', chip: 'bg-white text-sky-700 border border-sky-200 dark:bg-slate-700 dark:text-sky-400 dark:border-slate-600',
+    cardStripe: 'bg-sky-400 dark:bg-sky-500', cardHoverBorder: 'hover:border-sky-300 dark:hover:border-sky-600',
+    addHoverBg: 'hover:bg-sky-100/80 dark:hover:bg-sky-900/30', addHoverText: 'hover:text-sky-700 dark:hover:text-sky-400',
   },
   {
     id: 'done', title: 'Completado', icon: 'check-circle-2',
-    colBg: 'bg-emerald-50/70', colBorder: 'border-emerald-200/70', topBar: 'bg-emerald-400',
-    dot: 'bg-emerald-500', heading: 'text-emerald-700', chip: 'bg-white text-emerald-700 border border-emerald-200',
-    cardStripe: 'bg-emerald-400', cardHoverBorder: 'hover:border-emerald-300',
-    addHoverBg: 'hover:bg-emerald-100/80', addHoverText: 'hover:text-emerald-700',
+    colBg: 'bg-emerald-50/70 dark:bg-emerald-900/20', colBorder: 'border-emerald-200/70 dark:border-emerald-800/70', topBar: 'bg-emerald-400 dark:bg-emerald-600',
+    dot: 'bg-emerald-500', heading: 'text-emerald-700 dark:text-emerald-400', chip: 'bg-white text-emerald-700 border border-emerald-200 dark:bg-slate-700 dark:text-emerald-400 dark:border-slate-600',
+    cardStripe: 'bg-emerald-400 dark:bg-emerald-500', cardHoverBorder: 'hover:border-emerald-300 dark:hover:border-emerald-600',
+    addHoverBg: 'hover:bg-emerald-100/80 dark:hover:bg-emerald-900/30', addHoverText: 'hover:text-emerald-700 dark:hover:text-emerald-400',
   },
 ]
 
 const TONES: Record<User['tone'], string> = {
-  brand:   'bg-brand-50 text-brand-700 border-brand-200',
-  success: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  warning: 'bg-amber-50 text-amber-700 border-amber-200',
-  info:    'bg-sky-50 text-sky-700 border-sky-200',
-  error:   'bg-red-50 text-red-700 border-red-200',
+  brand:   'bg-brand-50 text-brand-700 border-brand-200 dark:bg-brand-900/30 dark:text-brand-400 dark:border-brand-800',
+  success: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800',
+  warning: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800',
+  info:    'bg-sky-50 text-sky-700 border-sky-200 dark:bg-sky-900/30 dark:text-sky-400 dark:border-sky-800',
+  error:   'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800',
 }
 
 function columnDef(id: TaskColumn): ColumnDef {
@@ -136,8 +136,8 @@ export class Kanban {
   private floatingBurnBarrelHtml(): string {
     return `
       <div id="kanbanBurn"
-        class="kanban-burn fixed bottom-6 right-6 z-40 pointer-events-none opacity-0 translate-y-2 transition-all duration-200">
-        <div class="pointer-events-auto flex items-center gap-3 px-5 py-4 rounded-2xl border-2 border-dashed border-red-300 bg-white/95 backdrop-blur text-red-600 shadow-lg transition-all duration-150">
+        class="kanban-burn fixed bottom-6 left-6 z-40 pointer-events-none opacity-0 translate-y-2 transition-all duration-200">
+        <div class="pointer-events-auto flex items-center gap-3 px-5 py-4 rounded-2xl border-2 border-dashed border-red-300 dark:border-red-800 bg-white/95 dark:bg-slate-800/95 backdrop-blur text-red-600 dark:text-red-400 shadow-lg transition-all duration-150">
           ${icon('trash-2', 'w-5 h-5')}
           <span class="text-sm font-semibold">Suelta aquí para eliminar</span>
         </div>
@@ -163,22 +163,22 @@ export class Kanban {
 
         const cards = ut.length
           ? ut.map((t) => this.teamCardHtml(t)).join('')
-          : `<p class="text-xs text-slate-400 italic px-2 py-6 text-center">Sin tareas</p>`
+          : `<p class="text-xs text-slate-400 dark:text-slate-500 italic px-2 py-6 text-center">Sin tareas</p>`
 
         return `
           <div class="col s12 m6 l4 min-w-[18rem]">
-            <article class="card no-padding border bg-white rounded-2xl border border-slate-200 overflow-hidden h-full flex flex-col">
-              <header class="flex items-center gap-3 p-4 border-b border-slate-100">
-                <img src="${u.avatar}" alt="${escapeHtml(u.name)}" class="w-10 h-10 rounded-full object-cover" />
+            <article class="card no-padding border bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden h-full flex flex-col">
+              <header class="flex items-center gap-3 p-4 border-b border-slate-100 dark:border-slate-700">
+                <img src="${u.avatar}" alt="${escapeHtml(u.name)}" class="w-10 h-10 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700" />
                 <div class="min-w-0 flex-1">
-                  <p class="font-semibold text-slate-900 truncate">${escapeHtml(u.name)}</p>
-                  <p class="text-xs text-slate-500 truncate">${escapeHtml(u.role)}</p>
+                  <p class="font-semibold text-slate-900 dark:text-slate-100 truncate">${escapeHtml(u.name)}</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 truncate">${escapeHtml(u.role)}</p>
                 </div>
                 <span class="chip-soft px-2 py-1 rounded-full text-[11px] font-semibold border ${TONES[u.tone]}">
                   ${ut.length} tareas
                 </span>
               </header>
-              <div class="flex flex-wrap gap-1.5 px-4 py-3 bg-slate-50/50 border-b border-slate-100">
+              <div class="flex flex-wrap gap-1.5 px-4 py-3 bg-slate-50/50 dark:bg-slate-900/30 border-b border-slate-100 dark:border-slate-700">
                 ${counters}
               </div>
               <div
@@ -232,7 +232,7 @@ export class Kanban {
 
   private emptyColumnHtml(def: ColumnDef): string {
     return `
-      <div class="kanban-empty flex flex-col items-center justify-center gap-1.5 py-6 px-3 text-center text-slate-400">
+      <div class="kanban-empty flex flex-col items-center justify-center gap-1.5 py-6 px-3 text-center text-slate-400 dark:text-slate-500">
         <span class="${def.heading} opacity-60">${icon(def.icon, 'w-5 h-5')}</span>
         <p class="text-[11px] font-medium">Sin tareas en ${def.title.toLowerCase()}</p>
       </div>
@@ -244,21 +244,21 @@ export class Kanban {
     return `
       ${this.dropIndicatorHtml(t.id, t.column)}
       <div
-        class="kanban-card group relative bg-white rounded-xl border border-slate-200/80 pl-4 pr-3 py-3 cursor-grab active:cursor-grabbing hover:-translate-y-0.5 hover:shadow-md ${def.cardHoverBorder} transition-all overflow-hidden"
+        class="kanban-card group relative bg-white dark:bg-slate-800 rounded-xl border border-slate-200/80 dark:border-slate-700/80 pl-4 pr-3 py-3 cursor-grab active:cursor-grabbing hover:-translate-y-0.5 hover:shadow-md ${def.cardHoverBorder} transition-all overflow-hidden"
         draggable="true"
         data-card-id="${t.id}"
         data-column="${t.column}">
         <span class="absolute left-0 top-0 bottom-0 w-1 ${def.cardStripe}"></span>
-        <p class="text-sm text-slate-800 leading-snug">${escapeHtml(t.title)}</p>
+        <p class="text-sm text-slate-800 dark:text-slate-100 leading-snug">${escapeHtml(t.title)}</p>
         <div class="mt-3 flex items-center justify-between gap-2">
           <div class="flex items-center gap-1.5 min-w-0">
             ${u
-              ? `<img src="${u.avatar}" alt="${escapeHtml(u.name)}" class="w-5 h-5 rounded-full object-cover ring-2 ring-white shadow-sm shrink-0" />`
-              : `<span class="w-5 h-5 rounded-full bg-slate-200 grid place-items-center text-slate-400">${icon('user', 'w-3 h-3')}</span>`}
-            <span class="text-[11px] text-slate-600 truncate">${escapeHtml(u?.name ?? 'Sin asignar')}</span>
+              ? `<img src="${u.avatar}" alt="${escapeHtml(u.name)}" class="w-5 h-5 rounded-full object-cover ring-2 ring-white dark:ring-slate-700 shadow-sm shrink-0" />`
+              : `<span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-700 grid place-items-center text-slate-400 dark:text-slate-500">${icon('user', 'w-3 h-3')}</span>`}
+            <span class="text-[11px] text-slate-600 dark:text-slate-400 truncate">${escapeHtml(u?.name ?? 'Sin asignar')}</span>
           </div>
           <button
-            class="delete-card opacity-0 group-hover:opacity-100 focus:opacity-100 text-slate-400 hover:text-red-600 transition-all"
+            class="delete-card opacity-0 group-hover:opacity-100 focus:opacity-100 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 transition-all"
             data-delete-id="${t.id}"
             aria-label="Eliminar tarea">
             ${icon('trash-2', 'w-4 h-4')}
@@ -272,15 +272,15 @@ export class Kanban {
     const def = columnDef(t.column)
     return `
       <div
-        class="kanban-card group relative bg-white rounded-xl border border-slate-200/80 pl-4 pr-3 py-3 cursor-grab active:cursor-grabbing hover:-translate-y-0.5 hover:shadow-md ${def.cardHoverBorder} transition-all overflow-hidden"
+        class="kanban-card group relative bg-white dark:bg-slate-800 rounded-xl border border-slate-200/80 dark:border-slate-700/80 pl-4 pr-3 py-3 cursor-grab active:cursor-grabbing hover:-translate-y-0.5 hover:shadow-md ${def.cardHoverBorder} transition-all overflow-hidden"
         draggable="true"
         data-card-id="${t.id}"
         data-column="${t.column}">
         <span class="absolute left-0 top-0 bottom-0 w-1 ${def.cardStripe}"></span>
         <div class="flex items-start justify-between gap-2">
-          <p class="text-sm text-slate-800 leading-snug">${escapeHtml(t.title)}</p>
+          <p class="text-sm text-slate-800 dark:text-slate-100 leading-snug">${escapeHtml(t.title)}</p>
           <button
-            class="delete-card opacity-0 group-hover:opacity-100 focus:opacity-100 text-slate-400 hover:text-red-600 transition-all shrink-0"
+            class="delete-card opacity-0 group-hover:opacity-100 focus:opacity-100 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 transition-all shrink-0"
             data-delete-id="${t.id}"
             aria-label="Eliminar tarea">
             ${icon('trash-2', 'w-4 h-4')}
@@ -304,7 +304,7 @@ export class Kanban {
     return `
       <div data-add-card-wrap="${def.id}">
         <button
-          class="add-card-btn w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-500 ${def.addHoverText} ${def.addHoverBg} transition-colors"
+          class="add-card-btn w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-500 dark:text-slate-400 ${def.addHoverText} ${def.addHoverBg} transition-colors"
           data-add-card="${def.id}"
           type="button">
           ${icon('plus', 'w-4 h-4')}
@@ -312,11 +312,11 @@ export class Kanban {
         </button>
         <form class="add-card-form hidden" data-add-card-form="${def.id}">
           <textarea rows="3" required
-            class="add-card-input w-full p-2.5 text-sm rounded-xl bg-white border border-slate-300 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 resize-none outline-none shadow-sm"
+            class="add-card-input w-full p-2.5 text-sm rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 focus:border-brand-400 dark:focus:border-brand-500 focus:ring-2 focus:ring-brand-100 dark:focus:ring-brand-900 resize-none outline-none shadow-sm"
             placeholder="Describe la tarea…"></textarea>
           <div class="mt-2 flex items-center justify-end gap-1.5">
             <button type="button"
-              class="add-card-cancel px-3 py-1.5 rounded-lg text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+              class="add-card-cancel px-3 py-1.5 rounded-lg text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
               data-cancel-add="${def.id}">
               Cancelar
             </button>
@@ -374,31 +374,31 @@ export class Kanban {
         zone.addEventListener('dragover', (e) => {
           e.preventDefault()
           this.highlightIndicator(e as DragEvent, column)
-          zone.classList.add('ring-2', 'ring-brand-200', 'ring-inset')
-        })
-        zone.addEventListener('dragleave', () => {
-          this.clearHighlights(column)
-          zone.classList.remove('ring-2', 'ring-brand-200', 'ring-inset')
-        })
-        zone.addEventListener('drop', (e) => {
-          e.preventDefault()
-          this.handleDropPersonal(e as DragEvent, column)
-          zone.classList.remove('ring-2', 'ring-brand-200', 'ring-inset')
-        })
+          zone.classList.add('ring-2', 'ring-brand-200', 'dark:ring-brand-900', 'ring-inset')
+          })
+          zone.addEventListener('dragleave', () => {
+            this.clearHighlights(column)
+            zone.classList.remove('ring-2', 'ring-brand-200', 'dark:ring-brand-900', 'ring-inset')
+          })
+          zone.addEventListener('drop', (e) => {
+            e.preventDefault()
+            this.handleDropPersonal(e as DragEvent, column)
+            zone.classList.remove('ring-2', 'ring-brand-200', 'dark:ring-brand-900', 'ring-inset')
+          })
       })
     } else {
       this.root.querySelectorAll<HTMLElement>('[data-user-drop]').forEach((zone) => {
         const userId = zone.dataset.userDrop!
         zone.addEventListener('dragover', (e) => {
           e.preventDefault()
-          zone.classList.add('ring-2', 'ring-brand-200', 'ring-inset', 'bg-brand-50/40')
-        })
-        zone.addEventListener('dragleave', () => {
-          zone.classList.remove('ring-2', 'ring-brand-200', 'ring-inset', 'bg-brand-50/40')
-        })
-        zone.addEventListener('drop', (e) => {
-          e.preventDefault()
-          zone.classList.remove('ring-2', 'ring-brand-200', 'ring-inset', 'bg-brand-50/40')
+          zone.classList.add('ring-2', 'ring-brand-200', 'dark:ring-brand-900', 'ring-inset', 'bg-brand-50/40', 'dark:bg-brand-900/20')
+          })
+          zone.addEventListener('dragleave', () => {
+            zone.classList.remove('ring-2', 'ring-brand-200', 'dark:ring-brand-900', 'ring-inset', 'bg-brand-50/40', 'dark:bg-brand-900/20')
+          })
+          zone.addEventListener('drop', (e) => {
+            e.preventDefault()
+            zone.classList.remove('ring-2', 'ring-brand-200', 'dark:ring-brand-900', 'ring-inset', 'bg-brand-50/40', 'dark:bg-brand-900/20')
           const cardId = (e as DragEvent).dataTransfer?.getData('cardId')
           if (!cardId) return
           const task = this.tasks.find((t) => t.id === cardId)
@@ -419,15 +419,15 @@ export class Kanban {
     const inner = barrel.firstElementChild as HTMLElement | null
     barrel.addEventListener('dragover', (e) => {
       e.preventDefault()
-      inner?.classList.add('bg-red-50', 'border-red-500', 'scale-105')
+      inner?.classList.add('bg-red-50', 'dark:bg-red-900/30', 'border-red-500', 'dark:border-red-400', 'scale-105')
     })
     barrel.addEventListener('dragleave', () => {
-      inner?.classList.remove('bg-red-50', 'border-red-500', 'scale-105')
+      inner?.classList.remove('bg-red-50', 'dark:bg-red-900/30', 'border-red-500', 'dark:border-red-400', 'scale-105')
     })
     barrel.addEventListener('drop', (e) => {
       e.preventDefault()
       const id = (e as DragEvent).dataTransfer?.getData('cardId')
-      inner?.classList.remove('bg-red-50', 'border-red-500', 'scale-105')
+      inner?.classList.remove('bg-red-50', 'dark:bg-red-900/30', 'border-red-500', 'dark:border-red-400', 'scale-105')
       if (!id) return
       this.tasks = this.tasks.filter((t) => t.id !== id)
       this.render()

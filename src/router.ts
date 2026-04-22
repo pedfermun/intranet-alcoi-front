@@ -2,7 +2,7 @@ import { homePage } from './pages/home'
 import { notFoundPage } from './pages/not-found'
 import { sedesPage, wireSedesPage } from './pages/sedes'
 import { servidoresPage, wireServidoresPage } from './pages/servidores'
-import { chatbotPage, wireChatbotPage } from './pages/chatbot'
+import { chatbotWidget, wireChatbotWidget } from './components/chatbot-widget'
 import { tasksPage, wireTasksPage } from './pages/tasks'
 import { loginPage, wireLoginPage } from './pages/login'
 import { hydrateIcons } from './components/icons'
@@ -20,7 +20,6 @@ const routes: Record<string, Route> = {
   '/':           { render: homePage },
   '/sedes':      { render: sedesPage, wire: wireSedesPage },
   '/servidores': { render: servidoresPage, wire: wireServidoresPage },
-  '/chatbot':    { render: chatbotPage,    wire: wireChatbotPage },
   '/tareas':     { render: tasksPage,      wire: wireTasksPage },
   '/login':      { render: loginPage,      wire: wireLoginPage, public: true },
 }
@@ -65,6 +64,10 @@ async function renderRoute() {
   hydrateIcons(app)
   if (!route.public) wireTopbar()
   await route.wire?.()
+
+  const widgetRoot = document.getElementById('chatbot-widget-root')
+  if (widgetRoot) widgetRoot.style.display = route.public ? 'none' : ''
+
   window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
 }
 
@@ -87,8 +90,18 @@ export function navigateTo(path: string) {
   void renderRoute()
 }
 
+function initChatbotWidget() {
+  const container = document.createElement('div')
+  container.id = 'chatbot-widget-root'
+  container.innerHTML = chatbotWidget()
+  document.body.appendChild(container)
+  hydrateIcons(container)
+  wireChatbotWidget()
+}
+
 export function initRouter() {
   document.addEventListener('click', onLinkClick)
   window.addEventListener('popstate', () => void renderRoute())
+  initChatbotWidget()
   void renderRoute()
 }

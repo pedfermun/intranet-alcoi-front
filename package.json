@@ -22,7 +22,6 @@
   "dependencies": {
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.103.3",
-    "beercss": "^4.0.20",
     "highlight.js": "^11.11.1",
     "leaflet": "^1.9.4",
     "lucide": "^1.8.0",
