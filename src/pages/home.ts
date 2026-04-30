@@ -1,156 +1,216 @@
-import { layout, statCard } from '../components/layout'
+import { layout } from '../components/layout'
 import { icon } from '../components/icons'
-import { servicios, servidores, sedes, contactos } from '../lib/data'
+import { getServidores, getTasks, getCurrentUserId, getUser, type Estado } from '../lib/data'
 
-export function homePage(): string {
-  const operativos = servidores.filter((s) => s.estado === 'correcto').length
-  const avisos = servidores.filter((s) => s.estado === 'aviso' || s.estado === 'critico').length
+function donutChart(segments: { label: string; value: number; color: string }[], total: number): string {
+  const size = 160
+  const stroke = 24
+  const radius = (size - stroke) / 2
+  const circumference = 2 * Math.PI * radius
+  let offset = 0
 
-  const quickLinks = servicios.slice(0, 4)
+  const arcs = segments
+    .filter((s) => s.value > 0)
+    .map((s) => {
+      const pct = s.value / total
+      const dash = pct * circumference
+      const arc = `
+        <circle cx="${size / 2}" cy="${size / 2}" r="${radius}"
+          fill="none" stroke="${s.color}" stroke-width="${stroke}"
+          stroke-dasharray="${dash} ${circumference - dash}"
+          stroke-dashoffset="${-offset}"
+          stroke-linecap="round" class="transition-all duration-500" />`
+      offset += dash
+      return arc
+    })
+    .join('')
+
+  return `
+    <svg viewBox="0 0 ${size} ${size}" class="w-40 h-40 -rotate-90">
+      <circle cx="${size / 2}" cy="${size / 2}" r="${radius}" fill="none" class="donut-track" stroke="#e2e8f0" stroke-width="${stroke}" />
+      ${arcs}
+    </svg>`
+}
+
+const estadoMeta: Record<Estado, { label: string; color: string; dot: string }> = {
+  correcto:      { label: 'Operativos',     color: '#10b981', dot: 'bg-emerald-500' },
+  aviso:         { label: 'Aviso',          color: '#f59e0b', dot: 'bg-amber-500' },
+  critico:       { label: 'Crítico',        color: '#ef4444', dot: 'bg-red-500' },
+  mantenimiento: { label: 'Mantenimiento',  color: '#0ea5e9', dot: 'bg-sky-500' },
+}
+
+export async function homePage(): Promise<string> {
+  const [servidores, tasks, userId] = await Promise.all([
+    getServidores(),
+    getTasks(),
+    getCurrentUserId(),
+  ])
+
+  const user = userId ? await getUser(userId) : null
+  const firstName = user?.name?.split(' ')[0] ?? 'usuario'
+
+  const hour = new Date().getHours()
+  const greeting = hour < 13 ? 'Buenos días' : hour < 20 ? 'Buenas tardes' : 'Buenas noches'
+
+  const counts: Record<Estado, number> = { correcto: 0, aviso: 0, critico: 0, mantenimiento: 0 }
+  for (const s of servidores) counts[s.estado]++
+
+  const segments = (['correcto', 'aviso', 'critico', 'mantenimiento'] as Estado[]).map((e) => ({
+    label: estadoMeta[e].label,
+    value: counts[e],
+    color: estadoMeta[e].color,
+  }))
+
+  const myDoingTasks = tasks.filter((t) => t.assignedTo === userId && t.column === 'doing')
+
+  const quickLinks = [
+    { href: '/servidores', icon: 'server',        label: 'Servidores', bg: 'bg-emerald-500', ring: 'ring-emerald-200 dark:ring-emerald-900' },
+    { href: '/sedes',      icon: 'map-pin',        label: 'Sedes',      bg: 'bg-amber-500',   ring: 'ring-amber-200 dark:ring-amber-900' },
+    { href: '/tareas',     icon: 'kanban-square',  label: 'Tareas',     bg: 'bg-violet-500',  ring: 'ring-violet-200 dark:ring-violet-900' },
+  ]
+
+  const operativos = counts.correcto
+  const alertas = counts.aviso + counts.critico
+  const myTotalTasks = tasks.filter((t) => t.assignedTo === userId).length
 
   const content = `
     <!-- Hero -->
-    <section class="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 text-white elevation-3 mb-10">
-      <div class="absolute inset-0 opacity-20 mix-blend-overlay bg-[url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center"></div>
-      <div class="relative grid lg:grid-cols-2 gap-8 p-8 sm:p-12">
+    <section class="relative overflow-hidden rounded-2xl border border-brand-100 dark:border-brand-900/40 bg-gradient-to-br from-brand-50 via-white to-violet-50 dark:from-slate-800 dark:via-slate-900 dark:to-slate-800 elevation-2 p-6 sm:p-8 mb-6">
+      <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-brand-100/60 dark:from-brand-900/20 to-transparent rounded-full -translate-y-1/3 translate-x-1/4"></div>
+      <div class="absolute bottom-0 left-1/2 w-48 h-48 bg-gradient-to-t from-violet-100/40 dark:from-violet-900/10 to-transparent rounded-full translate-y-1/2"></div>
+
+      <div class="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
         <div>
-          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur text-white/90 text-xs font-semibold uppercase tracking-widest">
-            ${icon('sparkles')} Portal corporativo
-          </span>
-          <h1 class="mt-5 text-4xl sm:text-5xl font-bold tracking-tight leading-tight">
-            Bienvenido a la Intranet del <span class="text-brand-100">Institut d'Alcoi</span>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100/70 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 text-xs font-semibold uppercase tracking-widest mb-3">
+            ${icon('building-2')} Sede Alcoi
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+            ${greeting}, <span class="bg-gradient-to-r from-brand-600 to-violet-600 bg-clip-text text-transparent">${firstName}</span>
           </h1>
-          <p class="mt-5 max-w-xl text-brand-50/90 text-lg leading-relaxed">
-            Accede a los servicios internos, consulta el estado de la infraestructura y encuentra a tus compañeros del equipo ASIX 1º.
+          <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-lg">
+            Accede a los servicios internos y consulta el estado de la infraestructura.
           </p>
-          <div class="mt-7 flex flex-wrap items-center gap-3">
-            <a href="/servicios" data-link class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-brand-700 font-semibold hover:bg-brand-50 transition-colors elevation-1">
-              ${icon('layout-grid')} Ver servicios
+        </div>
+        <div class="flex items-center gap-3">
+          ${quickLinks.map((l) => `
+            <a href="${l.href}" data-link class="flex flex-col items-center gap-2 px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-white dark:border-slate-700 hover:elevation-2 hover:border-slate-200 dark:hover:border-slate-600 transition-all group cursor-pointer">
+              <span class="grid place-items-center w-10 h-10 rounded-xl ${l.bg} text-white ring-4 ${l.ring} icon-lg group-hover:scale-110 transition-transform">${icon(l.icon)}</span>
+              <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">${l.label}</span>
             </a>
-            <a href="/servidores" data-link class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 backdrop-blur text-white font-semibold hover:bg-white/20 transition-colors border border-white/25">
-              ${icon('activity')} Estado de sistemas
-            </a>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats summary -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <div class="relative overflow-hidden rounded-2xl border border-emerald-100 dark:border-slate-700 bg-gradient-to-br from-emerald-50 to-white dark:from-slate-800 dark:to-slate-900 elevation-1 p-5">
+        <div class="absolute -top-3 -right-3 w-16 h-16 bg-emerald-100/50 dark:bg-emerald-900/20 rounded-full"></div>
+        <div class="relative">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="grid place-items-center w-8 h-8 rounded-lg bg-emerald-500 text-white icon-sm">${icon('shield-check')}</span>
+            <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide">Operativos</span>
           </div>
+          <p class="text-3xl font-bold text-emerald-700 dark:text-emerald-400">${operativos}<span class="text-sm font-medium text-emerald-500 dark:text-emerald-500 ml-1">/ ${servidores.length}</span></p>
         </div>
-        <div class="hidden lg:flex items-center justify-center">
-          <div class="relative w-full max-w-md">
-            <div class="absolute -inset-4 bg-white/10 rounded-3xl blur-2xl"></div>
-            <div class="relative rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-6">
-              <p class="text-xs uppercase tracking-widest text-brand-100/80 font-semibold">Infraestructura hoy</p>
-              <div class="mt-4 grid grid-cols-2 gap-4">
-                <div class="rounded-xl bg-white/10 p-4">
-                  <p class="text-3xl font-bold">${operativos}</p>
-                  <p class="text-sm text-brand-100/90">Servidores operativos</p>
-                </div>
-                <div class="rounded-xl bg-white/10 p-4">
-                  <p class="text-3xl font-bold">${avisos}</p>
-                  <p class="text-sm text-brand-100/90">Requieren atención</p>
-                </div>
-                <div class="rounded-xl bg-white/10 p-4">
-                  <p class="text-3xl font-bold">${sedes.length}</p>
-                  <p class="text-sm text-brand-100/90">Sedes activas</p>
-                </div>
-                <div class="rounded-xl bg-white/10 p-4">
-                  <p class="text-3xl font-bold">${contactos.length}</p>
-                  <p class="text-sm text-brand-100/90">Miembros equipo</p>
-                </div>
-              </div>
-            </div>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl border border-amber-100 dark:border-slate-700 bg-gradient-to-br from-amber-50 to-white dark:from-slate-800 dark:to-slate-900 elevation-1 p-5">
+        <div class="absolute -top-3 -right-3 w-16 h-16 bg-amber-100/50 dark:bg-amber-900/20 rounded-full"></div>
+        <div class="relative">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="grid place-items-center w-8 h-8 rounded-lg bg-amber-500 text-white icon-sm">${icon('triangle-alert')}</span>
+            <span class="text-xs font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-wide">Alertas</span>
           </div>
+          <p class="text-3xl font-bold text-amber-700 dark:text-amber-400">${alertas}<span class="text-sm font-medium text-amber-400 ml-1">activas</span></p>
+        </div>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl border border-violet-100 dark:border-slate-700 bg-gradient-to-br from-violet-50 to-white dark:from-slate-800 dark:to-slate-900 elevation-1 p-5">
+        <div class="absolute -top-3 -right-3 w-16 h-16 bg-violet-100/50 dark:bg-violet-900/20 rounded-full"></div>
+        <div class="relative">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="grid place-items-center w-8 h-8 rounded-lg bg-violet-500 text-white icon-sm">${icon('list-checks')}</span>
+            <span class="text-xs font-semibold text-violet-700 dark:text-violet-400 uppercase tracking-wide">Mis tareas</span>
+          </div>
+          <p class="text-3xl font-bold text-violet-700 dark:text-violet-400">${myTotalTasks}<span class="text-sm font-medium text-violet-400 ml-1">total</span></p>
         </div>
       </div>
     </section>
 
-    <!-- Stats -->
-    <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-      ${statCard({ label: 'Servicios activos',  value: servicios.length,  icon: 'layout-grid', tone: 'brand' })}
-      ${statCard({ label: 'Operativos',         value: operativos,        icon: 'shield-check', tone: 'success', hint: 'En los últimos 15 min' })}
-      ${statCard({ label: 'Con incidencia',     value: avisos,            icon: 'triangle-alert', tone: 'warning' })}
-      ${statCard({ label: 'Sedes conectadas',   value: sedes.length,      icon: 'map-pin', tone: 'info' })}
-    </section>
+    <!-- Dashboard widgets -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
 
-    <!-- Quick access -->
-    <section class="mb-10">
-      <div class="flex items-end justify-between mb-4">
-        <div>
-          <h2 class="text-xl font-semibold text-slate-900">Accesos rápidos</h2>
-          <p class="text-sm text-slate-500">Los servicios que más usa tu equipo.</p>
-        </div>
-        <a href="/servicios" data-link class="text-sm font-semibold text-brand-700 hover:text-brand-800 inline-flex items-center gap-1">
-          Ver todos ${icon('arrow-right')}
-        </a>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        ${quickLinks
-          .map(
-            (s) => `
-          <a href="${s.url}" ${s.url.startsWith('/') ? 'data-link' : ''} class="group bg-white rounded-2xl border border-slate-200 p-5 hover:border-brand-400 hover:-translate-y-0.5 transition-all elevation-1 hover:elevation-2">
-            <div class="grid place-items-center w-11 h-11 rounded-xl bg-brand-50 text-brand-700 icon-lg">
-              ${icon(s.icono)}
-            </div>
-            <h3 class="mt-4 font-semibold text-slate-900 group-hover:text-brand-700 transition-colors">${s.nombre}</h3>
-            <p class="mt-1 text-sm text-slate-500 line-clamp-2">${s.descripcion}</p>
-          </a>`
-          )
-          .join('')}
-      </div>
-    </section>
-
-    <!-- Two-column: Activity + Team -->
-    <section class="grid lg:grid-cols-3 gap-6">
-      <article class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 elevation-1 p-6">
-        <div class="flex items-center justify-between mb-4">
+      <!-- Server status donut -->
+      <article class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 elevation-1 overflow-hidden">
+        <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-brand-50 dark:from-brand-900/20 to-transparent border-b border-slate-100 dark:border-slate-700">
+          <span class="grid place-items-center w-10 h-10 rounded-xl bg-brand-600 text-white icon-lg">${icon('activity')}</span>
           <div>
-            <h2 class="text-lg font-semibold text-slate-900">Actividad reciente</h2>
-            <p class="text-sm text-slate-500">Últimas acciones en la plataforma.</p>
+            <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">Estado de servidores</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Distribución por estado</p>
           </div>
-          <button class="inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-brand-700">${icon('refresh-cw')} Actualizar</button>
         </div>
-        <ul class="divide-y divide-slate-100">
-          ${[
-            { ic: 'server', tone: 'bg-emerald-50 text-emerald-700', text: '<b>SRV-WEB-ALC01</b> completó su backup diario correctamente.', time: 'Hace 5 min' },
-            { ic: 'triangle-alert', tone: 'bg-red-50 text-red-700', text: '<b>SRV-MAIL-ALC02</b> alcanzó el 95% de uso de disco.', time: 'Hace 27 min' },
-            { ic: 'user-plus', tone: 'bg-brand-50 text-brand-700', text: '<b>Pablo Fernández</b> actualizó su perfil en el directorio.', time: 'Hace 2 h' },
-            { ic: 'calendar-check', tone: 'bg-sky-50 text-sky-700', text: 'Reunión de seguimiento ASIX 1º agendada para el viernes.', time: 'Ayer' },
-          ]
-            .map(
-              (a) => `
-            <li class="flex items-start gap-3 py-3">
-              <span class="grid place-items-center w-9 h-9 rounded-lg ${a.tone}">${icon(a.ic)}</span>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm text-slate-700">${a.text}</p>
-                <p class="text-xs text-slate-400 mt-0.5">${a.time}</p>
-              </div>
-            </li>`
-            )
-            .join('')}
-        </ul>
+        <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 p-6">
+          <div class="relative flex-shrink-0">
+            ${donutChart(segments, servidores.length)}
+            <div class="absolute inset-0 flex flex-col items-center justify-center rotate-0">
+              <span class="text-2xl font-bold text-slate-900 dark:text-slate-100">${servidores.length}</span>
+              <span class="text-[10px] font-medium text-slate-400 uppercase tracking-wider">total</span>
+            </div>
+          </div>
+          <ul class="flex-1 w-full space-y-2.5">
+            ${(['correcto', 'aviso', 'critico', 'mantenimiento'] as Estado[])
+              .map((e) => {
+                const pct = servidores.length ? Math.round((counts[e] / servidores.length) * 100) : 0
+                return `
+              <li class="flex items-center justify-between text-sm px-3 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                <span class="flex items-center gap-2.5">
+                  <span class="w-3 h-3 rounded-full ${estadoMeta[e].dot} ring-2 ring-offset-1 dark:ring-offset-slate-800 ${estadoMeta[e].dot.replace('bg-', 'ring-').replace('-500', '-200')}"></span>
+                  <span class="text-slate-700 dark:text-slate-300 font-medium">${estadoMeta[e].label}</span>
+                </span>
+                <span class="flex items-center gap-2">
+                  <span class="text-xs text-slate-400">${pct}%</span>
+                  <span class="font-bold text-slate-900 dark:text-slate-100 tabular-nums w-5 text-right">${counts[e]}</span>
+                </span>
+              </li>`
+              })
+              .join('')}
+          </ul>
+        </div>
       </article>
 
-      <article class="bg-white rounded-2xl border border-slate-200 elevation-1 p-6">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold text-slate-900">Tu equipo</h2>
-          <a href="/contacto" data-link class="text-sm font-semibold text-brand-700 hover:text-brand-800">Directorio</a>
+      <!-- My doing tasks -->
+      <article class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 elevation-1 overflow-hidden">
+        <div class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-sky-50 dark:from-sky-900/20 to-transparent border-b border-slate-100 dark:border-slate-700">
+          <div class="flex items-center gap-3">
+            <span class="grid place-items-center w-10 h-10 rounded-xl bg-sky-500 text-white icon-lg">${icon('loader-circle')}</span>
+            <div>
+              <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100">Mis tareas en progreso</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">${myDoingTasks.length} ${myDoingTasks.length === 1 ? 'tarea activa' : 'tareas activas'}</p>
+            </div>
+          </div>
+          <a href="/tareas" data-link class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-50 dark:bg-brand-900/40 text-brand-600 dark:text-brand-300 hover:bg-brand-100 dark:hover:bg-brand-900/60 text-xs font-semibold transition-colors cursor-pointer">
+            Ver todas ${icon('arrow-right', 'w-3.5 h-3.5')}
+          </a>
         </div>
-        <ul class="space-y-3">
-          ${contactos
-            .slice(0, 4)
-            .map(
-              (c) => `
-            <li class="flex items-center gap-3">
-              <img src="${c.avatar}" alt="${c.nombre}" class="w-10 h-10 rounded-full object-cover ring-2 ring-white elevation-1" />
-              <div class="min-w-0 flex-1">
-                <p class="text-sm font-semibold text-slate-900 truncate">${c.nombre}</p>
-                <p class="text-xs text-slate-500 truncate">${c.cargo}</p>
-              </div>
-              <a href="mailto:${c.email}" class="text-slate-400 hover:text-brand-700 icon-sm" aria-label="Enviar email">${icon('mail')}</a>
-            </li>`
-            )
-            .join('')}
-        </ul>
+        <div class="p-6">
+        ${myDoingTasks.length === 0
+          ? `<div class="flex flex-col items-center justify-center py-8 text-slate-400">
+               ${icon('circle-check-big', 'w-10 h-10 mb-2 text-emerald-300')}
+               <p class="text-sm font-medium text-slate-500 dark:text-slate-400">No tienes tareas en progreso</p>
+               <p class="text-xs text-slate-400 mt-1">Todas las tareas completadas</p>
+             </div>`
+          : `<ul class="space-y-2.5">
+              ${myDoingTasks.map((t) => `
+                <li class="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-gradient-to-r from-sky-50/80 dark:from-sky-900/20 to-slate-50/50 dark:to-slate-800/50 border border-sky-100/80 dark:border-sky-900/40 hover:border-sky-200 dark:hover:border-sky-800 transition-colors">
+                  <span class="w-2.5 h-2.5 rounded-full bg-sky-500 ring-4 ring-sky-100 dark:ring-sky-900/50 flex-shrink-0"></span>
+                  <span class="text-sm font-medium text-slate-800 dark:text-slate-200 truncate">${t.title}</span>
+                </li>`).join('')}
+             </ul>`
+        }
+        </div>
       </article>
+
     </section>
-  `
+    `
 
   return layout(content)
 }
