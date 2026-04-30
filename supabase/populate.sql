@@ -132,14 +132,13 @@ INSERT INTO public.sedes (nombre, ciudad, direccion, telefono, email, descripcio
 -- 4. SERVIDORES
 -- =============================================================
 INSERT INTO public.servidores (hostname, ip, sistema_operativo, rol, sede, estado, servicios, uptime, ultima_revision, cpu, memoria, disco) VALUES
-('SRV-WEB-ALC01',        '192.168.1.10', 'Ubuntu Server 22.04 LTS', 'Web Server',         'Alcoy',     'correcto',      ARRAY['Apache2','MySQL','PHP 8.1'],       '15 días, 8 horas',  '2026-04-10 09:30:00+00', 25, 60, 45),
-('SRV-DB-BCN01',         '192.168.2.20', 'CentOS 8',                'Database Server',    'Barcelona', 'correcto',      ARRAY['PostgreSQL','Redis','MongoDB'],    '22 días, 14 horas', '2026-04-12 14:15:00+00', 35, 75, 30),
-('SRV-APP-VIG01',        '192.168.3.15', 'Windows Server 2022',     'Application Server', 'Vigo',      'aviso',         ARRAY['IIS','SQL Server','.NET Runtime'], '8 días, 6 horas',   '2026-04-11 16:45:00+00', 80, 85, 70),
-('SRV-BACKUP-MAD01',     '192.168.4.25', 'Debian 11',               'Backup Server',      'Madrid',    'correcto',      ARRAY['Bacula','NFS','SSH'],              '30 días, 12 horas', '2026-04-09 08:00:00+00', 15, 40, 85),
-('SRV-MAIL-ALC02',       '192.168.1.50', 'Ubuntu Server 20.04 LTS', 'Mail Server',        'Alcoy',     'critico',       ARRAY['Postfix','Dovecot'],               '2 días, 4 horas',   '2026-04-13 07:20:00+00', 95, 90, 95),
-('SRV-MONITORING-BCN02', '192.168.2.30', 'CentOS 9',                'Monitoring Server',  'Barcelona', 'mantenimiento', ARRAY['Nagios','Grafana','Prometheus'],   '45 días, 18 horas', '2026-04-08 10:30:00+00', 20, 55, 25),
-('SRV-FILE-VIG02',       '192.168.3.40', 'FreeBSD 13',              'File Server',        'Vigo',      'correcto',      ARRAY['Samba','NFS','FTP'],               '18 días, 22 horas', '2026-04-10 12:00:00+00', 10, 30, 60),
-('SRV-PROXY-MAD02',      '192.168.4.35', 'Ubuntu Server 22.04 LTS', 'Proxy Server',       'Madrid',    'aviso',         ARRAY['Squid','HAProxy','Fail2Ban'],      '12 días, 3 horas',  '2026-04-12 11:45:00+00', 70, 80, 40);
+('SRV-DC-01',    '192.168.88.211', 'Windows Server 2022',     'Domain Controller',  'Alcoy', 'correcto', ARRAY['Active Directory','DNS','DHCP'],       '42 días, 6 horas',  '2026-04-28 09:00:00+00', 18, 45, 32),
+('SRV-DAD-01',   '192.168.88.212', 'Windows Server 2022',     'Database Server',    'Alcoy', 'correcto', ARRAY['SQL Server','SSRS','SSAS'],             '38 días, 11 horas', '2026-04-27 14:30:00+00', 30, 62, 55),
+('SRV-DC-02',    '192.168.88.221', 'Windows Server 2022',     'Domain Controller',  'Alcoy', 'correcto', ARRAY['Active Directory','DNS','DFSR'],        '40 días, 3 horas',  '2026-04-28 08:45:00+00', 12, 38, 28),
+('SRV-MONIT-01', '192.168.88.222', 'Debian 13', 'Monitoring Server',  'Alcoy', 'correcto', ARRAY['Zabbix','Grafana','Prometheus'],        '35 días, 19 horas', '2026-04-28 10:15:00+00', 22, 50, 20),
+('SRV-APP-01',   '192.168.88.223', 'Debian 13', 'Application Server', 'Alcoy', 'correcto', ARRAY['Nginx','Node.js','PM2'],                '29 días, 7 horas',  '2026-04-27 16:00:00+00', 40, 68, 47),
+('SRV-NAS01',    '192.168.88.231', 'TrueNAS SCALE',           'File Server',        'Alcoy', 'correcto', ARRAY['SMB','NFS','iSCSI'],                    '55 días, 2 horas',  '2026-04-26 11:00:00+00',  8, 25, 72),
+('SRV-WEB-DMZ',  '192.168.88.232', 'Debian 13', 'Web Server (DMZ)',   'Alcoy', 'correcto', ARRAY['Apache2','Certbot','ModSecurity'],      '21 días, 14 horas', '2026-04-28 07:30:00+00', 15, 35, 30);
 
 -- =============================================================
 -- 5. SERVICIOS

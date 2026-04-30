@@ -93,7 +93,7 @@ export function chatbotWidget(): string {
             id="chatbot-input"
             rows="1"
             placeholder="Escribe un mensaje..."
-            class="flex-1 resize-none rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 px-3 py-2 text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-brand-400 dark:focus:border-brand-500 transition-colors leading-relaxed"
+            class="flex-1 resize-none overflow-hidden rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 px-3 py-2 text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-brand-400 dark:focus:border-brand-500 transition-colors leading-relaxed"
           ></textarea>
           <button id="chatbot-send-btn"
             class="grid place-items-center w-9 h-9 rounded-xl bg-brand-600 text-white hover:bg-brand-700 transition-colors shrink-0 icon-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
@@ -170,20 +170,12 @@ export function wireChatbotWidget() {
     const wrapper = document.createElement('div')
     wrapper.className = role === 'user'
       ? 'flex justify-end'
-      : 'flex justify-start items-end gap-1.5'
-
-    if (role === 'assistant') {
-      const avatar = document.createElement('div')
-      avatar.className = 'grid place-items-center w-6 h-6 rounded-md bg-brand-600 text-white shrink-0 icon-sm mb-0.5'
-      avatar.innerHTML = '<i data-lucide="bot"></i>'
-      wrapper.appendChild(avatar)
-      import('./icons').then(({ hydrateIcons }) => hydrateIcons(avatar))
-    }
+      : ''
 
     const bubble = document.createElement('div')
     bubble.className = role === 'user'
       ? 'max-w-[80%] bg-brand-600 text-white rounded-2xl rounded-tr-sm px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap'
-      : 'chat-prose max-w-[80%] bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-2xl rounded-tl-sm px-3 py-2 text-sm'
+      : 'chat-prose text-slate-800 dark:text-slate-100 px-1 py-1 text-sm'
 
     if (role === 'user') {
       bubble.textContent = text
